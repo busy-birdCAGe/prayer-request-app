@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { useTheme } from "@mui/material/styles";
 import { useThemeContext } from "./ThemeContext";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 function App() {
   const theme = useTheme(); // Get the theme object from Material UI
@@ -30,12 +30,9 @@ function App() {
       </Box>
       <h1>Vite + React</h1>
       <div className="card">
-        <button
-          style={{ backgroundColor: theme.palette.background.default }}
-          onClick={handleThemeToggle}
-        >
+        <Button color="primary" onClick={handleThemeToggle}>
           count is now at {count}, theme is at {themeMode}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>

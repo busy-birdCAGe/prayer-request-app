@@ -4,6 +4,7 @@ import { createTheme, ThemeOptions } from "@mui/material/styles";
 interface ThemeColors {
   primaryBackground: string;
   primaryText: string;
+  primaryColor: string;
   // Add other common theme colors here
 }
 
@@ -16,11 +17,14 @@ const commonThemeColors: ThemeMode = {
   light: {
     primaryBackground: "#ffffff",
     primaryText: "#333333",
+    primaryColor: "#90EE90",
     // Define other common light theme colors here
   },
   dark: {
     primaryBackground: "red",
     primaryText: "#ffffff",
+    primaryColor: "#FFC0CB",
+
     // Define other common dark theme colors here
   },
 };
@@ -37,6 +41,10 @@ export const createAppTheme = (
       },
       text: {
         primary: colors[themeMode].primaryText,
+      },
+      primary: {
+        // Custom primary color for buttons and other components
+        main: colors[themeMode].primaryColor,
       },
       // You can customize other aspects of the theme here
       // typography, spacing, breakpoints, etc.
