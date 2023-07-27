@@ -1,17 +1,17 @@
 reviewers:
   # The default reviewers
   defaults:
-    - carcamoa # username
-    - karzunn
-    - carcamog
+    - birds
 
 files:
   # Keys are glob expressions.
   # You can assign groups defined above as well as GitHub usernames.
   '**':
-    - carcamoa # username
-    - karzunn
-    - carcamog
+    groups:
+      birds:
+        - carcamoa # username
+        - karzunn
+        - carcamog
 
 options:
   ignore_draft: true
