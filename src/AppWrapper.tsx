@@ -1,7 +1,6 @@
 // AppWrapper.tsx (or your root component)
 import React, { useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import { ThemeProvider as StyledThemeProvider } from "@emotion/react";
 import App from "./App";
 import commonThemeColors, { createAppTheme } from "./theme/theme";
 
@@ -27,9 +26,7 @@ const AppWrapper: React.FC = () => {
       <ThemeContext.Provider value={themeContextValue}>
         {/* Wrap the Material UI ThemeProvider with the styled-components ThemeProvider */}
         <ThemeProvider theme={appTheme}>
-          <StyledThemeProvider theme={appTheme}>
-            <App />
-          </StyledThemeProvider>
+          <App />
         </ThemeProvider>
       </ThemeContext.Provider>
     </React.StrictMode>
