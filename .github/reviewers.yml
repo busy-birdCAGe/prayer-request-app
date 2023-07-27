@@ -1,7 +1,9 @@
 reviewers:
   # The default reviewers
   defaults:
-    - birds
+    - carcamoa # username
+    - karzunn
+    - carcamog
 
 files:
   # Keys are glob expressions.
