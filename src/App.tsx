@@ -1,23 +1,23 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import { useState } from "react";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
 import "./App.css";
-import { useTheme } from "@mui/material/styles";
-import { useThemeContext } from "./ThemeContext";
-import { Box, Button } from "@mui/material";
-import AuthPage from "./pages/authPage/authPage";
+// import { useTheme } from "@mui/material/styles";
+// import { useThemeContext } from "./ThemeContext";
+import { Box } from "@mui/material";
+import AuthPage from "./pages/authPage/AuthPage";
 
 function App() {
-  const theme = useTheme(); // Get the theme object from Material UI
+  //const theme = useTheme(); // Get the theme object from Material UI
 
-  const { themeMode, toggleTheme } = useThemeContext(); // Get the theme mode and toggleTheme function from the context
+  //const { themeMode, toggleTheme } = useThemeContext(); // Get the theme mode and toggleTheme function from the context
 
-  const handleThemeToggle = () => {
-    setCount((count) => count + 1);
-    toggleTheme(); // Call the toggleTheme function to switch between light and dark themes
-  };
+  // const handleThemeToggle = () => {
+  //   setCount((count) => count + 1);
+  //   toggleTheme(); // Call the toggleTheme function to switch between light and dark themes
+  // };
 
-  const [count, setCount] = useState(0);
+  //const [count, setCount] = useState(0);
 
   return (
     <Box
