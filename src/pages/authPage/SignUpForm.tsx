@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { userService } from '../../services/user';
 
 interface SignUpProps {
-  setPage: React.Dispatch<React.SetStateAction<number>>
+  setTab: React.Dispatch<React.SetStateAction<number>>
 }
 
 interface FormData {
@@ -15,7 +15,7 @@ interface FormData {
 
 const SignUpForm = (props: SignUpProps) => {
 
-  const { setPage } = props;
+  const { setTab } = props;
 
   const [formData, setFormData] = useState<FormData>({
     userName: '',
@@ -39,7 +39,7 @@ const SignUpForm = (props: SignUpProps) => {
       await userService.sendEmailVerification();
       //TODO make this a modal
       alert("Sign up successful! Please check your emails for a verification link.");
-      setPage(0);
+      setTab(0);
     }
     catch (error: any) {
       console.log(error);
