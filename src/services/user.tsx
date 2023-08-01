@@ -42,11 +42,11 @@ class UserService {
   }
 
   async getUserByUserName(userName: string): Promise<User | null> {
-    const q = query(
+    const userNameQuery = query(
       this.userCollection,
       where(userCollection.fields.userName, "==", userName)
     );
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(userNameQuery);
     if (querySnapshot.size === 0) {
       return null;
     }
@@ -55,11 +55,11 @@ class UserService {
   }
 
   async getUserByEmail(email: string): Promise<User | null> {
-    const q = query(
+    const emailQuery = query(
       this.userCollection,
       where(userCollection.fields.email, "==", email)
     );
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await getDocs(emailQuery);
     if (querySnapshot.size === 0) {
       return null;
     }
