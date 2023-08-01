@@ -1,7 +1,8 @@
 import { auth, firestore } from './firebase';
-import { createUserWithEmailAndPassword, sendEmailVerification, Auth, UserCredential } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, Auth } from "firebase/auth";
 import { collection, addDoc, Firestore, CollectionReference } from "firebase/firestore";
 import { userCollection } from "../constants";
+import { base_url } from "../env";
 
 class UserService {
 
@@ -25,7 +26,7 @@ class UserService {
         let user = this.auth.currentUser;
         if (user) {
             await sendEmailVerification(user, {
-                url: "http://localhost:5173"
+                url: base_url
             })
         }
         else {

@@ -7,3 +7,5 @@ export const firebase_config = {
   appId: "1:78789230436:web:95fd06cf4bf375ef704471",
   measurementId: "G-5BHKFBQKMS"
 };
+
+export const base_url = "http://dev-prayer-request-app.s3-website-us-east-1.amazonaws.com"
