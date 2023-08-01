@@ -1,5 +1,6 @@
 import { Box, Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { userService } from '../../services/user';
 
 interface FormData {
   userName: string;
@@ -18,20 +19,23 @@ const SignUpForm = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log("name of event " + event.target.name);
     setFormData((prevFormData) => {
-        console.log(prevFormData)
         return{...prevFormData, [name]: value }
         } 
         );
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-
-    // Here, you can handle the submission of sign-up information.
-    // You may want to store it in state or send it to a server, etc.
+    try {
+      await userService.createUser(formData.userName, formData.email, formData.password)
+      await userService.sendEmailVerification()
+      alert("Sign up successful! Please check your emails for a verification link.")
+    }
+    catch (error: any) {
+      console.log(error)
+      alert("There was an error when signing up, please try again")
+    }
   };
 
   return (
@@ -99,7 +103,7 @@ const SignUpForm = () => {
         }}
         color={"secondary"}
         variant={"contained"}
-
+        type="submit"
       >
         Submit
       </Button>
