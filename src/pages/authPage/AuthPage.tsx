@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography} from "@mui/material";
+import { Tabs, Tab, Box, Typography } from "@mui/material";
 import SignInForm from "./SignUpForm";
 import LogInForm from "./SignInForm";
 import unity from "../../assets/unity.svg";
@@ -15,13 +15,12 @@ const AuthPage = () => {
     <Box
       sx={{
         mt: "20%",
-
       }}
     >
-        <img src={unity} alt="logo" style={{ width: 105}}/>
-      <Box sx={{ bgcolor: "white", mt: 8}}>
+      <img src={unity} alt="logo" style={{ width: 105 }} />
+      <Box sx={{ bgcolor: "white", mt: 8 }}>
         <Tabs
-          sx={{mb:6}}
+          sx={{ mb: 6 }}
           value={tab}
           onChange={handleChange}
           indicatorColor="primary"
@@ -34,7 +33,7 @@ const AuthPage = () => {
       </Box>
 
       <Typography component="div" role="tabpanel" p={2}>
-        {tab === 0 ? <LogInForm /> : <SignInForm setTab={setTab}/>}
+        {tab === 0 ? <LogInForm /> : <SignInForm setTab={setTab} />}
       </Typography>
     </Box>
   );
