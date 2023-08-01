@@ -5,10 +5,10 @@ import LogInForm from "./SignInForm";
 import unity from "../../assets/unity.svg";
 
 const AuthPage = () => {
-  const [value, setValue] = useState(0);
+  const [page, setPage] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (event: React.SyntheticEvent, newPage: number) => {
+    setPage(newPage);
   };
 
   return (
@@ -22,7 +22,7 @@ const AuthPage = () => {
       <Box sx={{ bgcolor: "white", mt: 8}}>
         <Tabs
           sx={{mb:6}}
-          value={value}
+          value={page}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
@@ -34,7 +34,7 @@ const AuthPage = () => {
       </Box>
 
       <Typography component="div" role="tabpanel" p={2}>
-        {value === 0 ? <LogInForm /> : <SignInForm />}
+        {page === 0 ? <LogInForm /> : <SignInForm setPage={setPage}/>}
       </Typography>
     </Box>
   );

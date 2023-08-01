@@ -2,6 +2,10 @@ import { Box, Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { userService } from '../../services/user';
 
+interface SignUpProps {
+  setPage: React.Dispatch<React.SetStateAction<number>>
+}
+
 interface FormData {
   userName: string;
   email: string;
@@ -9,7 +13,10 @@ interface FormData {
   confirmPassword: string;
 }
 
-const SignUpForm = () => {
+const SignUpForm = (props: SignUpProps) => {
+
+  const { setPage } = props;
+
   const [formData, setFormData] = useState<FormData>({
     userName: '',
     email: '',
@@ -28,13 +35,16 @@ const SignUpForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await userService.createUser(formData.userName, formData.email, formData.password)
-      await userService.sendEmailVerification()
-      alert("Sign up successful! Please check your emails for a verification link.")
+      await userService.createUser(formData.userName, formData.email, formData.password);
+      await userService.sendEmailVerification();
+      //TODO make this a modal
+      alert("Sign up successful! Please check your emails for a verification link.");
+      setPage(0);
     }
     catch (error: any) {
-      console.log(error)
-      alert("There was an error when signing up, please try again")
+      console.log(error);
+      //TODO make this a modal
+      alert("There was an error when signing up, please try again");
     }
   };
 
