@@ -1,1 +1,8 @@
-export const userCollection: string = "users";
+export const userCollection = {
+    name: "users",
+    fields: {
+        userName: "userName",
+        email: "email",
+        userId: "userId"
+    }
+}

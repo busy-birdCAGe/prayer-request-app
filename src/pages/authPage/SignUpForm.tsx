@@ -24,27 +24,46 @@ const SignUpForm = (props: SignUpProps) => {
     confirmPassword: '',
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => {
-        return{...prevFormData, [name]: value }
+          return{...prevFormData, [name]: value }
         } 
-        );
+      );
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    
     event.preventDefault();
+
     try {
+
+      let user = await userService.getUserByUserName(formData.userName);
+      if (user) {
+        //TODO make this a modal
+        alert(`User already exists with user name: ${user.userName}`)
+        return
+      }
+      user = await userService.getUserByEmail(formData.email);
+      if (user) {
+        //TODO make this a modal
+        alert(`User already exists with email: ${user.email}`)
+        return
+      }
+
       await userService.createUser(formData.userName, formData.email, formData.password);
       await userService.sendEmailVerification();
       //TODO make this a modal
       alert("Sign up successful! Please check your emails for a verification link.");
       setTab(0);
+
     }
     catch (error: any) {
+
       console.log(error);
       //TODO make this a modal
       alert("There was an error when signing up, please try again");
+
     }
   };
 
@@ -70,7 +89,7 @@ const SignUpForm = (props: SignUpProps) => {
           type="text"
           name="userName"
           value={formData.userName}
-          onChange={handleChange}
+          onChange={handleInputChange}
           variant="standard"
         //   required
         />
@@ -79,7 +98,7 @@ const SignUpForm = (props: SignUpProps) => {
           type="email"
           name="email"
           value={formData.email}
-          onChange={handleChange}
+          onChange={handleInputChange}
           variant="standard"
         //   required
         />
@@ -88,7 +107,7 @@ const SignUpForm = (props: SignUpProps) => {
           type="password"
           name="password"
           value={formData.password}
-          onChange={handleChange}
+          onChange={handleInputChange}
           variant="standard"
         //   required
         />
@@ -97,7 +116,7 @@ const SignUpForm = (props: SignUpProps) => {
           type="password"
           name="confirmPassword"
           value={formData.confirmPassword}
-          onChange={handleChange}
+          onChange={handleInputChange}
           variant="standard"
         //   required
         />
