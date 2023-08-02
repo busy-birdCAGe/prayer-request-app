@@ -12,7 +12,7 @@ const AuthPage = () => {
   };
 
   const boxShadowStyle = {
-    boxShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 0px 8px 4px rgba(0, 0, 0, 0.05)'
+    boxShadow: "0px 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 0px 8px 4px rgba(0, 0, 0, 0.05)"
   };
 
   return (
@@ -27,15 +27,15 @@ const AuthPage = () => {
           <Tabs
             style={boxShadowStyle}
             sx={{
-              minHeight: '20px',
+              minHeight: "20px",
               mb: 6,
               borderRadius: 100,
               "& .MuiTab-root": {
                 borderRadius: "25px",
                 color: "#000000",
                 width: "108px",
-                minHeight: '20px',
-                fontWeight: 'bold',
+                minHeight: "20px",
+                fontWeight: "bold",
                 fontSize: "12px"
 
               },

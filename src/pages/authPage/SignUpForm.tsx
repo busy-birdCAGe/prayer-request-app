@@ -80,7 +80,7 @@ const SignUpForm = (props: SignUpProps) => {
           flexDirection: "column",
           height: 200,
           "& .MuiInputBase-root":{marginBottom: "10px"},
-          '& .MuiInputBase-root, & .MuiFormLabel-root': { fontSize: '12px' }
+          "& .MuiInputBase-root, & .MuiFormLabel-root": { fontSize: "12px" }
         }}
       >
         <TextField
