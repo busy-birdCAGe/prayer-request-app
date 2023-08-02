@@ -115,8 +115,6 @@ class UserService {
     await this.signInWithEmailAndPassword(user.email, password);
   }
 
-  
-
 }
 
 export let userService = new UserService(auth, firestore);
