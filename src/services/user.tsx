@@ -21,13 +21,12 @@ import { base_url } from "../env";
 class User {
   constructor(
     public userName: string,
-    public email: string,
     public userId: string
   ) {}
 
   static fromDocument(doc: DocumentData): User {
-    const { userName, email, userId } = doc;
-    return new User(userName, email, userId);
+    const { userName, userId } = doc;
+    return new User(userName, userId);
   }
 }
 
@@ -55,19 +54,6 @@ class UserService {
     return User.fromDocument(doc);
   }
 
-  async getUserByEmail(email: string): Promise<User | null> {
-    const emailQuery = query(
-      this.userCollection,
-      where(userCollection.fields.email, "==", email)
-    );
-    const querySnapshot = await getDocs(emailQuery);
-    if (querySnapshot.size === 0) {
-      return null;
-    }
-    const doc = querySnapshot.docs[0].data();
-    return User.fromDocument(doc);
-  }
-
   async createUser(
     userName: string,
     email: string,
@@ -80,7 +66,6 @@ class UserService {
     );
     let doc = await addDoc(this.userCollection, {
       [userCollection.fields.userName]: userName,
-      [userCollection.fields.email]: credentials.user.email,
       [userCollection.fields.userId]: credentials.user.uid,
     });
     return doc.id;
@@ -103,18 +88,6 @@ class UserService {
   ): Promise<void> {
     await signInWithEmailAndPassword(this.auth, email, password);
   }
-
-  async signInWithUsernameAndPassword(
-    userName: string,
-    password: string
-  ): Promise<void> {
-    const user = await this.getUserByUserName(userName);
-    if (!user) {
-      throw new Error("User not found.");
-    }
-    await this.signInWithEmailAndPassword(user.email, password);
-  }
-
 }
 
 export let userService = new UserService(auth, firestore);

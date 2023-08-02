@@ -40,12 +40,6 @@ const SignUpForm = (props: SignUpProps) => {
         alert(`User already exists with user name: ${user.userName}`);
         return;
       }
-      user = await userService.getUserByEmail(formData.email);
-      if (user) {
-        //TODO make this a modal
-        alert(`User already exists with email: ${user.email}`);
-        return;
-      }
 
       await userService.createUser(
         formData.userName,
@@ -60,8 +54,12 @@ const SignUpForm = (props: SignUpProps) => {
       setTab(0);
     } catch (error: any) {
       console.log(error);
-      //TODO make this a modal
-      alert("There was an error when signing up, please try again");
+      if (error.code == "auth/email-already-in-use") {
+        alert(`User already exists with email: ${formData.email}`);
+      } else {
+        //TODO make this a modal
+        alert("There was an error when signing up, please try again");
+      }
     }
   };
 
