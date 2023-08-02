@@ -10,36 +10,48 @@ import NavWrapper from "./pages/NavWrapper";
 import RequestsPage from "./pages/requestsPage/RequestsPage";
 import CommunityPage from "./pages/communityPage/CommunityPage";
 import NotificationsPage from "./pages/notificationsPage/NotificationsPage";
+import PrivateRoutes from "./utils/PrivateRoutes";
+import SettingsPage from "./pages/settingsPage/SettingsPage";
 
 function App() {
 
   const router = createBrowserRouter([
+    // {
+    //   TODO: create an error page to catch all nonexistent routes
+    //   path: "*",
+    //   element: <ErrorPage />,
+    // },
     {
       path: "/",
       element: <AuthPage />,
-      // errorElement: <ErrorPage />,
     },
     {
-      // path: "/",
-      element: <NavWrapper />,
-      // errorElement: <ErrorPage />,
-      //pathless route to catch errors
-      //TODO: create an error page if we want
+      //pathless route to nest routes
+      element: <PrivateRoutes/>,
       children: [
         {
-          index:true,
-          path: "requests",
-          element: <RequestsPage />,
+          element: <NavWrapper />,
+          children: [
+                {
+                  index:true,
+                  path: "requests",
+                  element: <RequestsPage />,
+                },
+                {
+                  path: "community",
+                  element: <CommunityPage />,
+                },
+                {
+                  path: "notifications",
+                  element: <NotificationsPage />,
+                },
+          ]
         },
         {
-          path: "community",
-          element: <CommunityPage />,
+          path: "settings",
+          element: <SettingsPage />,
         },
-        {
-          path: "notifications",
-          element: <NotificationsPage />,
-        },
-  ]
+      ],
     },
     
   ]);
