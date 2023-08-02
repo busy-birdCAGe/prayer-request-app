@@ -32,6 +32,8 @@ const LogInForm = () => {
           display: "flex",
           flexDirection: "column",
           height: 200,
+          "& .MuiInputBase-root, & .MuiFormLabel-root": { fontSize: "12px" },
+          "& .MuiInputBase-root": { marginBottom: "10px" },
         }}
       >
         <TextField
@@ -57,6 +59,7 @@ const LogInForm = () => {
           borderRadius: 100,
           backgroundColor: "black",
           fontSize: 12,
+          fontWeight: "bold",
           px: 5,
           py: 1,
         }}
