@@ -2,6 +2,7 @@ import { auth, firestore } from "./firebase";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  signInWithEmailAndPassword,
   Auth,
 } from "firebase/auth";
 import {
@@ -95,6 +96,27 @@ class UserService {
       throw "No user signed in";
     }
   }
+
+  async signInWithEmailAndPassword(
+    email: string,
+    password: string
+  ): Promise<void> {
+    await signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+  async signInWithUsernameAndPassword(
+    userName: string,
+    password: string
+  ): Promise<void> {
+    const user = await this.getUserByUserName(userName);
+    if (!user) {
+      throw new Error("User not found.");
+    }
+    await this.signInWithEmailAndPassword(user.email, password);
+  }
+
+  
+
 }
 
 export let userService = new UserService(auth, firestore);

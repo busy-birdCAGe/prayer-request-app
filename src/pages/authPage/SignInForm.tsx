@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Box, Button } from "@mui/material";
+import { userService } from "../../services/user";
 
 const LogInForm = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,21 @@ const LogInForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    try {
+        await userService.signInWithEmailAndPassword(email, password);
+        alert("Sign in successful!")
+    } catch (error: any) {
+      console.log(error);
+      if (error.code == "auth/wrong-password") {
+        alert("Wrong password");
+      }
+      else if (error.code == "auth/user-not-found") {
+        alert(`No user with email: ${email}`);
+      }
+      else {
+        alert("Encountered an error when signing in");
+      }
+    }
   };
 
   return (
@@ -62,6 +78,7 @@ const LogInForm = () => {
         }}
         color={"secondary"}
         variant={"contained"}
+        type={"submit"}
       >
         Submit
       </Button>
