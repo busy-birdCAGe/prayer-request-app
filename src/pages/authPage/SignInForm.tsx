@@ -53,12 +53,12 @@ const LogInForm = () => {
       </Box>
       <Button
         sx={{
-          mt:12,
+          mt: 12,
           borderRadius: 100,
           backgroundColor: "black",
           fontSize: 12,
-          px:5,
-          py:1
+          px: 5,
+          py: 1,
         }}
         color={"secondary"}
         variant={"contained"}

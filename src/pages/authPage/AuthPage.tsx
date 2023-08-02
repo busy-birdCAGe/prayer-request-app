@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography} from "@mui/material";
+import { Tabs, Tab, Box, Typography } from "@mui/material";
 import SignInForm from "./SignUpForm";
 import LogInForm from "./SignInForm";
 import unity from "../../assets/unity.svg";
 
 const AuthPage = () => {
-  const [value, setValue] = useState(0);
+  const [tab, setTab] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (event: React.SyntheticEvent, tabNumber: number) => {
+    setTab(tabNumber);
   };
 
   return (
     <Box
       sx={{
         mt: "20%",
-
       }}
     >
-        <img src={unity} alt="logo" style={{ width: 105}}/>
-      <Box sx={{ bgcolor: "white", mt: 8}}>
+      <img src={unity} alt="logo" style={{ width: 105 }} />
+      <Box sx={{ bgcolor: "white", mt: 8 }}>
         <Tabs
-          sx={{mb:6}}
-          value={value}
+          sx={{ mb: 6 }}
+          value={tab}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
@@ -34,7 +33,7 @@ const AuthPage = () => {
       </Box>
 
       <Typography component="div" role="tabpanel" p={2}>
-        {value === 0 ? <LogInForm /> : <SignInForm />}
+        {tab === 0 ? <LogInForm /> : <SignInForm setTab={setTab} />}
       </Typography>
     </Box>
   );

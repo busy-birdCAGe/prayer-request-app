@@ -6,3 +6,5 @@ export const firebase_config = {
   messagingSenderId: "571558690310",
   appId: "1:571558690310:web:e594580eeb165e7e6d8d87"
 }
+
+export const base_url = "http://prod-prayer-request-app.s3-website-us-east-1.amazonaws.com"
