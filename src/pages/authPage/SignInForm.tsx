@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Box, Button } from "@mui/material";
 
-const SignInForm = () => {
+const LogInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,6 +32,8 @@ const SignInForm = () => {
           display: "flex",
           flexDirection: "column",
           height: 200,
+          "& .MuiInputBase-root, & .MuiFormLabel-root": { fontSize: "12px" },
+          "& .MuiInputBase-root": { marginBottom: "10px" },
         }}
       >
         <TextField
@@ -57,6 +59,7 @@ const SignInForm = () => {
           borderRadius: 100,
           backgroundColor: "black",
           fontSize: 12,
+          fontWeight: "bold",
           px: 5,
           py: 1,
         }}
@@ -69,4 +72,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default LogInForm;
