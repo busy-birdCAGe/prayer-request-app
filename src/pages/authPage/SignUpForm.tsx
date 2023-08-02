@@ -1,6 +1,7 @@
 import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { userService } from "../../services/user";
+import { errorMessages } from "../../constants";
 
 interface SignUpProps {
   setTab: React.Dispatch<React.SetStateAction<number>>;
@@ -37,7 +38,7 @@ const SignUpForm = (props: SignUpProps) => {
       let user = await userService.getUserByUserName(formData.userName);
       if (user) {
         //TODO make this a modal
-        alert(`User already exists with user name: ${user.userName}`);
+        alert("User already exists with the given user name");
         return;
       }
 
@@ -53,13 +54,8 @@ const SignUpForm = (props: SignUpProps) => {
       );
       setTab(0);
     } catch (error: any) {
-      console.log(error);
-      if (error.code == "auth/email-already-in-use") {
-        alert(`User already exists with email: ${formData.email}`);
-      } else {
-        //TODO make this a modal
-        alert("There was an error when signing up, please try again");
-      }
+      //TODO make this a modal
+      alert(error.message);
     }
   };
 

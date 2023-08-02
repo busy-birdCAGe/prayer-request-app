@@ -15,14 +15,11 @@ import {
   CollectionReference,
   DocumentData,
 } from "firebase/firestore";
-import { userCollection } from "../constants";
+import { userCollection, errorMessages } from "../constants";
 import { base_url } from "../env";
 
 class User {
-  constructor(
-    public userName: string,
-    public userId: string
-  ) {}
+  constructor(public userName: string, public userId: string) {}
 
   static fromDocument(doc: DocumentData): User {
     const { userName, userId } = doc;
@@ -42,16 +39,21 @@ class UserService {
   }
 
   async getUserByUserName(userName: string): Promise<User | null> {
-    const userNameQuery = query(
-      this.userCollection,
-      where(userCollection.fields.userName, "==", userName)
-    );
-    const querySnapshot = await getDocs(userNameQuery);
-    if (querySnapshot.size === 0) {
-      return null;
+    try {
+      const userNameQuery = query(
+        this.userCollection,
+        where(userCollection.fields.userName, "==", userName)
+      );
+      const querySnapshot = await getDocs(userNameQuery);
+      if (querySnapshot.size === 0) {
+        return null;
+      }
+      const doc = querySnapshot.docs[0].data();
+      return User.fromDocument(doc);
+    } catch (error: any) {
+      console.log(error);
+      throw new Error(errorMessages.database.any);
     }
-    const doc = querySnapshot.docs[0].data();
-    return User.fromDocument(doc);
   }
 
   async createUser(
@@ -59,26 +61,46 @@ class UserService {
     email: string,
     password: string
   ): Promise<string> {
-    let credentials = await createUserWithEmailAndPassword(
-      this.auth,
-      email,
-      password
-    );
-    let doc = await addDoc(this.userCollection, {
-      [userCollection.fields.userName]: userName,
-      [userCollection.fields.userId]: credentials.user.uid,
-    });
-    return doc.id;
+    let credentials;
+    try {
+      credentials = await createUserWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+    } catch (error: any) {
+      console.log(error);
+      if (error.code == "auth/email-already-in-use") {
+        throw new Error(errorMessages.auth.emailExists);
+      } else {
+        throw new Error(errorMessages.auth.any);
+      }
+    }
+    try {
+      let doc = await addDoc(this.userCollection, {
+        [userCollection.fields.userName]: userName,
+        [userCollection.fields.userId]: credentials.user.uid,
+      });
+      return doc.id;
+    } catch (error: any) {
+      console.log(error);
+      throw new Error(errorMessages.database.any);
+    }
   }
 
   async sendEmailVerification() {
     let user = this.auth.currentUser;
     if (user) {
-      await sendEmailVerification(user, {
-        url: base_url,
-      });
+      try {
+        await sendEmailVerification(user, {
+          url: base_url,
+        });
+      } catch (error: any) {
+        console.log(error);
+        throw new Error(errorMessages.auth.sendVerification);
+      }
     } else {
-      throw "No user signed in";
+      throw new Error(errorMessages.auth.noUser);
     }
   }
 
@@ -86,7 +108,12 @@ class UserService {
     email: string,
     password: string
   ): Promise<void> {
-    await signInWithEmailAndPassword(this.auth, email, password);
+    try {
+      await signInWithEmailAndPassword(this.auth, email, password);
+    } catch (error: any) {
+      console.log(error);
+      throw new Error(errorMessages.auth.any);
+    }
   }
 }
 

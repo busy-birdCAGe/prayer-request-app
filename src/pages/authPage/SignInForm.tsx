@@ -18,19 +18,12 @@ const LogInForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-        await userService.signInWithEmailAndPassword(email, password);
-        alert("Sign in successful!")
+      await userService.signInWithEmailAndPassword(email, password);
+      //TODO make this a modal
+      alert("Sign in successful!");
     } catch (error: any) {
-      console.log(error);
-      if (error.code == "auth/wrong-password") {
-        alert("Wrong password");
-      }
-      else if (error.code == "auth/user-not-found") {
-        alert(`No user with email: ${email}`);
-      }
-      else {
-        alert("Encountered an error when signing in");
-      }
+      //TODO make this a modal
+      alert(error.message);
     }
   };
 
