@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
-import SignInForm from "./SignUpForm";
-import LogInForm from "./SignInForm";
+import SignUpForm from "./SignUpForm";
+import SignInForm from "./SignInForm";
 import unity from "../../assets/unity.svg";
 
 const AuthPage = () => {
@@ -33,7 +33,7 @@ const AuthPage = () => {
       </Box>
 
       <Typography component="div" role="tabpanel" p={2}>
-        {tab === 0 ? <LogInForm /> : <SignInForm setTab={setTab} />}
+        {tab === 0 ? <SignInForm /> : <SignUpForm setTab={setTab} />}
       </Typography>
     </Box>
   );

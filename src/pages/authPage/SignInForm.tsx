@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Box, Button } from "@mui/material";
 
-const LogInForm = () => {
+const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -69,4 +69,4 @@ const LogInForm = () => {
   );
 };
 
-export default LogInForm;
+export default SignInForm;
