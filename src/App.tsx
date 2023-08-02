@@ -27,24 +27,19 @@ function App() {
       //TODO: create an error page if we want
       children: [
         {
-          // errorElement: <ErrorPage />,
-          children: [
-                {
-                  index:true,
-                  path: "requests",
-                  element: <RequestsPage />,
-                },
-                {
-                  path: "community",
-                  element: <CommunityPage />,
-                },
-                {
-                  path: "notifications",
-                  element: <NotificationsPage />,
-                },
-          ]
+          index:true,
+          path: "requests",
+          element: <RequestsPage />,
         },
-      ],
+        {
+          path: "community",
+          element: <CommunityPage />,
+        },
+        {
+          path: "notifications",
+          element: <NotificationsPage />,
+        },
+  ]
     },
     
   ]);
