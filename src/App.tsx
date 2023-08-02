@@ -1,54 +1,71 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import { useState } from "react";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
 import "./App.css";
-import { useTheme } from "@mui/material/styles";
-import { useThemeContext } from "./ThemeContext";
-import { Box, Button } from "@mui/material";
-import AuthPage from "./pages/authPage/authPage";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+// import { useTheme } from "@mui/material/styles";
+// import { useThemeContext } from "./ThemeContext";
+import AuthPage  from "./pages/authPage/AuthPage";
+import NavWrapper from "./pages/NavWrapper";
+import RequestsPage from "./pages/requestsPage/RequestsPage";
+import CommunityPage from "./pages/communityPage/CommunityPage";
+import NotificationsPage from "./pages/notificationsPage/NotificationsPage";
 
 function App() {
-  const theme = useTheme(); // Get the theme object from Material UI
 
-  const { themeMode, toggleTheme } = useThemeContext(); // Get the theme mode and toggleTheme function from the context
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <AuthPage />,
+      // errorElement: <ErrorPage />,
+    },
+    {
+      // path: "/",
+      element: <NavWrapper />,
+      // errorElement: <ErrorPage />,
+      //pathless route to catch errors
+      //TODO: create an error page if we want
+      children: [
+        {
+          // errorElement: <ErrorPage />,
+          children: [
+                {
+                  index:true,
+                  path: "requests",
+                  element: <RequestsPage />,
+                },
+                {
+                  path: "community",
+                  element: <CommunityPage />,
+                },
+                {
+                  path: "notifications",
+                  element: <NotificationsPage />,
+                },
+          ]
+        },
+      ],
+    },
+    
+  ]);
 
-  const handleThemeToggle = () => {
-    setCount((count) => count + 1);
-    toggleTheme(); // Call the toggleTheme function to switch between light and dark themes
-  };
+  // TODO: Move theme logic to settings page
 
-  const [count, setCount] = useState(0);
+  // const theme = useTheme(); // Get the theme object from Material UI
+
+  // const { themeMode, toggleTheme } = useThemeContext(); // Get the theme mode and toggleTheme function from the context
+
+  // const handleThemeToggle = () => {
+  //   setCount((count) => count + 1);
+  //   toggleTheme(); // Call the toggleTheme function to switch between light and dark themes
+  // };
+
+  // const [count, setCount] = useState(0);
 
   return (
-    <Box
-    sx={{
-      height: "100vh",
-    }}
-  >
     <>
-      <AuthPage/>
-      {/* <Box sx={{ backgroundColor: theme.palette.background.default }}>
-        <a href="https://vitejs.dev" target="_blank">
-        <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-        <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-        </Box>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button color="primary" onClick={handleThemeToggle}>
-        count is now at {count}, theme is at {themeMode}
-        </Button>
-        <p>
-        Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-        </div>
-        <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
+      <RouterProvider router = {router} />
     </>
-      </Box>
   );
 }
 
