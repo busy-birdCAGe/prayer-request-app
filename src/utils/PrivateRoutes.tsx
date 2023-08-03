@@ -12,7 +12,7 @@ const PrivateRoutes = () => {
   userService.setupAuthStateListener(setAuthState);
 
   if (authState.loading) {
-    return <Box></Box>; //TODO: Blank loading screen for now
+    return <Box>loading...</Box>; //TODO: Blank loading screen for now
   } else {
     return authState.authenticated ? <Outlet /> : <Navigate to="/" />;
   }
