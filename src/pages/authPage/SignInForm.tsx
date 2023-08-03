@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Box, Button } from "@mui/material";
+import { userService } from "../../services/user";
 
 const LogInForm = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,14 @@ const LogInForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    try {
+      await userService.signInWithEmailAndPassword(email, password);
+      //TODO make this a modal
+      alert("Sign in successful!");
+    } catch (error: any) {
+      //TODO make this a modal
+      alert(error.message);
+    }
   };
 
   return (
@@ -65,6 +74,7 @@ const LogInForm = () => {
         }}
         color={"secondary"}
         variant={"contained"}
+        type={"submit"}
       >
         Submit
       </Button>
