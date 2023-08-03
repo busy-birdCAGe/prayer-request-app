@@ -6,6 +6,7 @@ import {
   Auth,
   onAuthStateChanged,
   User as FirebaseAuthUser,
+  signOut
 } from "firebase/auth";
 import {
   collection,
@@ -144,6 +145,15 @@ class UserService {
       }
     });
   }
+
+  async signOutUser() {
+    try {
+      await signOut(this.auth);
+    } catch (error: any) {
+      throw new Error(errorMessages.auth.any)
+    }
+  }
+
 }
 
 export let userService = new UserService(auth, firestore);
