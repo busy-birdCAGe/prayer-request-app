@@ -1,7 +1,6 @@
 import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { userService } from "../../services/user";
-import { errorMessages } from "../../constants";
 
 interface SignUpProps {
   setTab: React.Dispatch<React.SetStateAction<number>>;
