@@ -11,6 +11,9 @@ import RequestsPage from "./pages/requestsPage/RequestsPage";
 import CommunityPage from "./pages/communityPage/CommunityPage";
 import NotificationsPage from "./pages/notificationsPage/NotificationsPage";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import AccountInfo from "./pages/settingsPage/AccountInfo";
+import HelpAndSupport from "./pages/settingsPage/HelpAndSupport";
+import SettingsRoutes from "./utils/SettingsRoutes";
 import SettingsPage from "./pages/settingsPage/SettingsPage";
 
 function App() {
@@ -49,7 +52,27 @@ function App() {
         },
         {
           path: "settings",
-          element: <SettingsPage />,
+          children: [
+            {
+              index:true,
+              element: <SettingsPage />,
+            },
+            {
+             element: <SettingsRoutes />,
+             children: [
+              {
+                path: "accountInfo",
+                element: <AccountInfo />,
+              },
+              {
+                path: "helpAndSupport",
+                element: <HelpAndSupport />,
+              },
+        ]
+
+            },
+
+      ]
         },
       ],
     },
