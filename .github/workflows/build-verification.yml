@@ -1,0 +1,29 @@
+name: Build Verification
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - develop
+      - master
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: NPM install
+        run: |
+          npm install
+      - name: Configure Environment Vars
+        run: |
+          cp environments/dev-env.tsx src/env.tsx
+      - name: Build
+        run: |
+          npm run build
