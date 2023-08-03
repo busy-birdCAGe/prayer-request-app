@@ -41,7 +41,6 @@ const SignUpForm = (props: SignUpProps) => {
         alert("User already exists with the given user name");
         return;
       }
-
       await userService.createUser(
         formData.userName,
         formData.email,
