@@ -17,7 +17,7 @@ const commonThemeColors: ThemeMode = {
   light: {
     primaryBackground: "#ffffff",
     primaryText: "#333333",
-    primaryColor: "#90EE90",
+    primaryColor: "#000000",
     // Define other common light theme colors here
   },
   dark: {
