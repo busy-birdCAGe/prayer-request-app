@@ -5,6 +5,7 @@ interface ThemeColors {
   primaryBackground: string;
   primaryText: string;
   primaryColor: string;
+  paper: string;
   // Add other common theme colors here
 }
 
@@ -18,12 +19,14 @@ const commonThemeColors: ThemeMode = {
     primaryBackground: "#ffffff",
     primaryText: "#333333",
     primaryColor: "#000000",
+    paper: "white"
     // Define other common light theme colors here
   },
   dark: {
     primaryBackground: "red",
     primaryText: "#ffffff",
     primaryColor: "#FFC0CB",
+    paper: "blue"
 
     // Define other common dark theme colors here
   },
@@ -37,6 +40,7 @@ export const createAppTheme = (
     palette: {
       mode: themeMode,
       background: {
+        paper: colors[themeMode].paper,
         default: colors[themeMode].primaryBackground,
       },
       text: {

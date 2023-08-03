@@ -9,3 +9,5 @@ export const firebase_config = {
 };
 
 export const base_url = "http://dev-prayer-request-app.s3-website-us-east-1.amazonaws.com"
+
+export const env = "DEV"

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography } from "@mui/material";
+import { Tabs, Tab, Box, Typography, useTheme } from "@mui/material";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 import unity from "../../assets/unity.svg";
-
+import ToggleTheme from "../../components/toggleTheme";
+import {env} from "../../../src/env";
 const AuthPage = () => {
   const [tab, setTab] = useState(0);
 
@@ -15,12 +16,17 @@ const AuthPage = () => {
     boxShadow: "0px 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 0px 8px 4px rgba(0, 0, 0, 0.05)"
   };
 
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
         mt: "20%",
+        bgcolor: theme.palette.background.paper
       }}
     >
+      {env == "LOCAL" &&  <ToggleTheme/>}
+
       <img src={unity} alt="logo" style={{ width: 105 }} />
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box sx={{ mt: 8 }}>
