@@ -11,10 +11,10 @@ import RequestsPage from "./pages/requestsPage/RequestsPage";
 import CommunityPage from "./pages/communityPage/CommunityPage";
 import NotificationsPage from "./pages/notificationsPage/NotificationsPage";
 import PrivateRoutes from "./utils/PrivateRoutes";
-import SettingsPage from "./pages/settingsPage/SettingsPage";
 import AccountInfo from "./pages/settingsPage/AccountInfo";
 import HelpAndSupport from "./pages/settingsPage/HelpAndSupport";
 import SettingsRoutes from "./utils/SettingsRoutes";
+import SettingsPage from "./pages/settingsPage/SettingsPage";
 
 function App() {
 

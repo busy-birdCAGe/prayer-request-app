@@ -1,15 +1,16 @@
-import { Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useMediaQuery, useTheme } from "@mui/material";
+import { Navigate} from "react-router-dom";
+import SettingsList from "./SettingsList";
 
 const SettingsPage = () => {
 
+  const theme = useTheme()  
+    
+  //checking if device width is 600px or less
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  return (
-    <Box sx={{ display:"grid"}}>
-      <Link to={"accountInfo"}>Account Info</Link>
-      <Link to={"helpAndSupport"}>Help And Support</Link>
-    </Box>
-  );
+  return mobile ? <SettingsList/> : <Navigate to='accountInfo'/>
+
 };
 
 export default SettingsPage;

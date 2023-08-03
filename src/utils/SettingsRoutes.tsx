@@ -1,5 +1,5 @@
 import { Outlet} from "react-router-dom";
-import SettingsPage from "../pages/settingsPage/SettingsPage";
+import SettingsList from "../pages/settingsPage/SettingsList";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 
 const SettingsRoutes = () => {
@@ -7,9 +7,9 @@ const SettingsRoutes = () => {
     const theme = useTheme()  
     
     //checking if device width is 600px or less
-    const matches = useMediaQuery(theme.breakpoints.down('sm'));
+    const mobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-    return matches ? <Outlet/> :  <Box><SettingsPage/><Outlet/></Box>
+    return mobile ? <Outlet/> :  <Box><SettingsList/><Outlet/></Box>
 };
 
 export default SettingsRoutes;
