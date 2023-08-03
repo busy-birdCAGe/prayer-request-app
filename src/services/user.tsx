@@ -51,7 +51,7 @@ class UserService {
       const doc = querySnapshot.docs[0].data();
       return User.fromDocument(doc);
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
       throw new Error(errorMessages.database.any);
     }
   }
@@ -69,10 +69,12 @@ class UserService {
         password
       );
     } catch (error: any) {
-      console.log(error);
       if (error.code == "auth/email-already-in-use") {
         throw new Error(errorMessages.auth.emailExists);
+      } else if (error.code == "auth/weak-password") {
+        throw new Error(errorMessages.auth.weakPassword);
       } else {
+        console.error(error);
         throw new Error(errorMessages.auth.any);
       }
     }
@@ -83,7 +85,7 @@ class UserService {
       });
       return doc.id;
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
       throw new Error(errorMessages.database.any);
     }
   }
@@ -96,7 +98,7 @@ class UserService {
           url: base_url,
         });
       } catch (error: any) {
-        console.log(error);
+        console.error(error);
         throw new Error(errorMessages.auth.sendVerification);
       }
     } else {
@@ -111,8 +113,14 @@ class UserService {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
     } catch (error: any) {
-      console.log(error);
-      throw new Error(errorMessages.auth.any);
+      if (error.code == "auth/wrong-password") {
+        throw new Error(errorMessages.auth.wrongPassword);
+      } else if (error.code == "auth/user-not-found") {
+        throw new Error(errorMessages.auth.wrongEmail);
+      } else {
+        console.error(error);
+        throw new Error(errorMessages.auth.any);
+      }
     }
   }
 }
