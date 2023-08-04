@@ -3,8 +3,11 @@ import { Tabs, Tab, Box, Typography, useTheme } from "@mui/material";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 import unity from "../../assets/unity.svg";
+import unityWhite from "../../assets/unityWhite.svg"
 import ToggleTheme from "../../components/toggleTheme";
 import {env} from "../../../src/env";
+import { dark } from "@mui/material/styles/createPalette";
+import { useThemeContext } from "../../ThemeContext";
 const AuthPage = () => {
   const [tab, setTab] = useState(0);
 
@@ -17,17 +20,17 @@ const AuthPage = () => {
   };
 
   const theme = useTheme();
+  const { themeMode } = useThemeContext();
 
   return (
+    <>
     <Box
       sx={{
         mt: "20%",
-        bgcolor: theme.palette.background.paper
       }}
     >
-      {env == "LOCAL" &&  <ToggleTheme/>}
 
-      <img src={unity} alt="logo" style={{ width: 105 }} />
+      <img src={themeMode == "dark"? unityWhite : unity} alt="logo" style={{ width: 105 }} />
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box sx={{ mt: 8 }}>
           <Tabs
@@ -35,25 +38,25 @@ const AuthPage = () => {
             sx={{
               minHeight: "20px",
               mb: 6,
+              bgcolor: theme.palette.background.default,
               borderRadius: 100,
               "& .MuiTab-root": {
                 borderRadius: "25px",
-                color: "#000000",
+                color: theme.palette.primary.light,
                 width: "108px",
                 minHeight: "20px",
                 fontWeight: "bold",
                 fontSize: "12px"
 
               },
-              "& button:focus": { outlineColor: "transparent" },
-              "& button.Mui-selected": { bgcolor: "#F9F871" },
+              // "& button:focus": { outlineColor: "transparent" },
+              "& button.Mui-selected": { bgcolor: theme.palette.primary.main},
               "& .MuiTabs-indicator": {
                 backgroundColor: "transparent",
               },
             }}
             value={tab}
             onChange={handleChange}
-            textColor="primary"
             centered
           >
             <Tab label="Sign In" />
@@ -66,6 +69,7 @@ const AuthPage = () => {
         {tab === 0 ? <SignInForm /> : <SignUpForm setTab={setTab} />}
       </Typography>
     </Box>
+    </>
   );
 };
 
