@@ -1,5 +1,4 @@
-import { Box, Button, useTheme } from "@mui/material";
-import { useState } from "react";
+import { Box, Button } from "@mui/material";
 import { useThemeContext } from "../ThemeContext";
 
 const ToggleTheme = () => {
