@@ -18,6 +18,7 @@ import SettingsPage from "./pages/settingsPage/SettingsPage";
 import { Box } from "@mui/material";
 import ToggleTheme from "./components/toggleTheme";
 import { env } from "./env";
+// import TestAuthPage from "./pages/authPage/TestAuthPage";
 
 function App() {
   const theme = useTheme();

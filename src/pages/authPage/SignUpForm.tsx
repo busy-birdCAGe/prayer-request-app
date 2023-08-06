@@ -1,4 +1,4 @@
-import { Box, Button, TextField, useTheme } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { userService } from "../../services/user";
 
@@ -15,7 +15,6 @@ interface FormData {
 
 const SignUpForm = (props: SignUpProps) => {
   const { setTab } = props;
-  const theme = useTheme();
 
   const [formData, setFormData] = useState<FormData>({
     userName: "",
