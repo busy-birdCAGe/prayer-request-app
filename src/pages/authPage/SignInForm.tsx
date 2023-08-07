@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Box, Button } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { userService } from "../../services/user";
 
 const LogInForm = () => {
+  const theme = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const theme = useTheme();
@@ -72,6 +73,9 @@ const LogInForm = () => {
           fontWeight: "bold",
           px: 5,
           py: 1,
+          [theme.breakpoints.down("iphone7")]:{
+            mt:6
+          }
         }}
         color={"secondary"}
         variant={"contained"}

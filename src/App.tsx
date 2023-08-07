@@ -18,6 +18,7 @@ import SettingsPage from "./pages/settingsPage/SettingsPage";
 import { Box } from "@mui/material";
 import ToggleTheme from "./components/toggleTheme";
 import { env } from "./env";
+import NewAuthPage from "./pages/authPage/NewAuthPage";
 // import TestAuthPage from "./pages/authPage/TestAuthPage";
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
     // },
     {
       path: "/",
-      element: <AuthPage />,
+      element: <NewAuthPage />,
     },
     {
       //pathless route to nest routes
@@ -81,8 +82,17 @@ function App() {
   ]);
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", textAlign: "center", bgcolor: theme.palette.background.paper, minHeight:"100vh", padding:0}}>
-            {env == "LOCAL" &&  <ToggleTheme/>}
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        textAlign: "center",
+        bgcolor: theme.palette.background.paper,
+        minHeight: "100vh",
+        padding: 0,
+      }}
+    >
+      {env == "LOCAL" && <ToggleTheme />}
       <RouterProvider router={router} />
     </Box>
   );
