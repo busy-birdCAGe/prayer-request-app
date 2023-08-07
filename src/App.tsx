@@ -14,7 +14,7 @@ import SettingsPage from "./pages/settingsPage/SettingsPage";
 import { Box } from "@mui/material";
 import ToggleTheme from "./components/ToggleTheme";
 import NewAuthPage from "./pages/authPage/NewAuthPage";
-import { isLocalHost } from "./utils/Utils";
+import { isLocalHost, isQA } from "./utils/Utils";
 
 function App() {
   const theme = useTheme();
@@ -87,7 +87,7 @@ function App() {
         padding: 0,
       }}
     >
-      {isLocalHost() && <ToggleTheme />}
+      {(isLocalHost() || isQA()) && <ToggleTheme />}
       <RouterProvider router={router} />
     </Box>
   );
