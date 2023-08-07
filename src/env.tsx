@@ -9,3 +9,5 @@ export const firebase_config = {
 };
 
 export const base_url = "http://localhost:5173"
+
+export const env = "LOCAL"

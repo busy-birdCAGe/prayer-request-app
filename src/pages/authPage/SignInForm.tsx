@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Box, Button } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { userService } from "../../services/user";
 
 const LogInForm = () => {
+  const theme = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const theme = useTheme();
+
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -66,11 +69,13 @@ const LogInForm = () => {
         sx={{
           mt: 12,
           borderRadius: 100,
-          backgroundColor: "black",
           fontSize: 12,
           fontWeight: "bold",
           px: 5,
           py: 1,
+          [theme.breakpoints.down("iphone7")]:{
+            mt:6
+          }
         }}
         color={"secondary"}
         variant={"contained"}
