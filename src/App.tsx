@@ -1,11 +1,7 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
-// import { useThemeContext } from "./ThemeContext";
-import AuthPage from "./pages/authPage/AuthPage";
+// import AuthPage from "./pages/authPage/AuthPage";
 import NavWrapper from "./pages/NavWrapper";
 import RequestsPage from "./pages/requestsPage/RequestsPage";
 import CommunityPage from "./pages/communityPage/CommunityPage";
@@ -17,9 +13,8 @@ import SettingsRoutes from "./utils/SettingsRoutes";
 import SettingsPage from "./pages/settingsPage/SettingsPage";
 import { Box } from "@mui/material";
 import ToggleTheme from "./components/ToggleTheme";
-import { env } from "./env";
 import NewAuthPage from "./pages/authPage/NewAuthPage";
-// import TestAuthPage from "./pages/authPage/TestAuthPage";
+import { isLocalHost } from "./utils/Utils";
 
 function App() {
   const theme = useTheme();
@@ -92,7 +87,7 @@ function App() {
         padding: 0,
       }}
     >
-      {env == "LOCAL" && <ToggleTheme />}
+      {isLocalHost() && <ToggleTheme />}
       <RouterProvider router={router} />
     </Box>
   );
