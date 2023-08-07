@@ -8,7 +8,8 @@ interface ThemeColors {
   secondaryColor: string;
   contrastTextColor: string;
   paper: string;
-  blue: string;
+  black: string;
+  tabColor: string;
   // Add other common theme colors here
 }
 
@@ -32,22 +33,24 @@ const commonThemeColors: ThemeMode = {
   light: {
     primaryBackground: "#ffffff",
     primaryText: "#000000",
-    primaryColor: "#F9F871",
+    primaryColor: "#000000",
     secondaryColor: "#000000",
     contrastTextColor: "#ffffff",
     paper: "white",
-    blue: "#000000",
+    black: "#000000",
+    tabColor: "#F9F871"
 
     // Define other common light theme colors here
   },
   dark: {
     primaryBackground: "#ffffff",
     primaryText: "#ffffff",
-    primaryColor: "#F9F871",
+    primaryColor: "#ffffff",
     secondaryColor: "#ffffff",
     contrastTextColor: "#000000",
     paper: "black",
-    blue: "#000000",
+    black: "#000000",
+    tabColor: "#F9F871"
 
     // Define other common dark theme colors here
   },
@@ -71,11 +74,12 @@ export const createAppTheme = (
       primary: {
         // Custom primary color for buttons and other components
         main: colors[themeMode].primaryColor,
-        light: colors[themeMode].blue,
+        light: colors[themeMode].black,
         contrastText: colors[themeMode].contrastTextColor,
       },
       secondary: {
         main: colors[themeMode].secondaryColor,
+        light: colors[themeMode].tabColor,
         contrastText: colors[themeMode].contrastTextColor,
       },
 

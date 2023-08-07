@@ -58,7 +58,7 @@ const NewAuthPage = () => {
                   },
                   // "& button:focus": { outlineColor: "transparent" },
                   "& button.Mui-selected": {
-                    bgcolor: theme.palette.primary.main,
+                    bgcolor: theme.palette.secondary.light,
                     color: theme.palette.primary.light,
                   },
                   "& .MuiTabs-indicator": {
