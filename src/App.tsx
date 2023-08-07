@@ -16,7 +16,7 @@ import HelpAndSupport from "./pages/settingsPage/HelpAndSupport";
 import SettingsRoutes from "./utils/SettingsRoutes";
 import SettingsPage from "./pages/settingsPage/SettingsPage";
 import { Box } from "@mui/material";
-import ToggleTheme from "./components/toggleTheme";
+import ToggleTheme from "./components/ToggleTheme";
 import { env } from "./env";
 import NewAuthPage from "./pages/authPage/NewAuthPage";
 // import TestAuthPage from "./pages/authPage/TestAuthPage";
