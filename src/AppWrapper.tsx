@@ -49,7 +49,7 @@ const AppWrapper: React.FC = () => {
     themeMode,
     toggleTheme,
   };
-
+  
   return (
     <React.StrictMode>
       {/* Wrap the entire app with your custom ThemeProvider */}
@@ -57,6 +57,7 @@ const AppWrapper: React.FC = () => {
       <CssBaseline />
         {/* Wrap the Material UI ThemeProvider with the styled-components ThemeProvider */}
         <ThemeProvider theme={appTheme}>
+          <CssBaseline/>
           <App />
         </ThemeProvider>
       </ThemeContext.Provider>
