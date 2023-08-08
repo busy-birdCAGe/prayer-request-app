@@ -6,7 +6,7 @@ const ToggleTheme = () => {
 
   //   const theme = useTheme(); // Get the theme object from Material UI
 
-  const { themeMode, toggleTheme } = useThemeContext(); // Get the theme mode and toggleTheme function from the context
+  const { toggleTheme } = useThemeContext(); // Get the theme mode and toggleTheme function from the context
 
   const handleThemeToggle = () => {
     // setCount((count) => count + 1);
