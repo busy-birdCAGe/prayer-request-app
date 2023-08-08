@@ -1,7 +1,12 @@
-import { Box, Button, TextField, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  useTheme,
+} from "@mui/material";
 import React, { useState } from "react";
 import { userService } from "../../services/user";
-
+import PasswordField from "../../components/PasswordField";
 
 interface SignUpProps {
   setTab: React.Dispatch<React.SetStateAction<number>>;
@@ -60,6 +65,17 @@ const SignUpForm = (props: SignUpProps) => {
     }
   };
 
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+
+  // const handleClickShowPassword = () => setShowPassword((show) => !show);
+  // const handleClickShowConfirmPassword = () => {
+  //   setShowConfirmPassword((show) => !show);
+  // };
+
+
+
   return (
     <Box
       sx={{
@@ -74,8 +90,8 @@ const SignUpForm = (props: SignUpProps) => {
           display: "flex",
           flexDirection: "column",
           height: 200,
-          "& .MuiInputBase-root":{marginBottom: "10px"},
-          "& .MuiInputBase-root, & .MuiFormLabel-root": { fontSize: "12px" }
+          "& .MuiInputBase-root": { marginBottom: "10px" },
+          "& .MuiInputBase-root, & .MuiFormLabel-root": { fontSize: "12px" },
         }}
       >
         <TextField
@@ -85,7 +101,7 @@ const SignUpForm = (props: SignUpProps) => {
           value={formData.userName}
           onChange={handleInputChange}
           variant="standard"
-          //   required
+          required
         />
         <TextField
           label="Email"
@@ -94,25 +110,24 @@ const SignUpForm = (props: SignUpProps) => {
           value={formData.email}
           onChange={handleInputChange}
           variant="standard"
-          //   required
+          required
         />
-        <TextField
-          label="Password"
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-          variant="standard"
-          //   required
-        />
-        <TextField
+          <PasswordField
+            label="Password"
+            name="password"
+            value={formData.password}
+            // showPassword={showPassword}
+            handleInputChange={handleInputChange}
+            // handleClickShowPassword={handleClickShowPassword}
+          />
+        <PasswordField
           label="Confirm Password"
-          type="password"
           name="confirmPassword"
           value={formData.confirmPassword}
-          onChange={handleInputChange}
-          variant="standard"
-          //   required
+          // showPassword={showConfirmPassword}
+          handleInputChange={handleInputChange}
+          // handleClickShowPassword={handleClickShowConfirmPassword}
+
         />
       </Box>
       <Button
@@ -123,9 +138,9 @@ const SignUpForm = (props: SignUpProps) => {
           fontWeight: "bold",
           px: 5,
           py: 1,
-          [theme.breakpoints.down("iphone7")]:{
-            mt:6
-          }
+          [theme.breakpoints.down("iphone7")]: {
+            mt: 6,
+          },
         }}
         color={"secondary"}
         variant={"contained"}

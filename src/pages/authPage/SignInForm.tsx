@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Box, Button, useTheme } from "@mui/material";
 import { userService } from "../../services/user";
+import PasswordField from "../../components/PasswordField";
 
 const LogInForm = () => {
   const theme = useTheme();
@@ -30,6 +31,10 @@ const LogInForm = () => {
     }
   };
 
+  // const [showPassword, setShowPassword] = React.useState(false);
+
+  // const handleClickShowPassword = () => setShowPassword((show) => !show);
+
   return (
     <Box
       sx={{
@@ -54,15 +59,15 @@ const LogInForm = () => {
           value={email}
           onChange={handleEmailChange}
           variant="standard"
-          //   required
+          required
         />
-        <TextField
+        <PasswordField
           label="Password"
-          type="password"
+          name="password"
           value={password}
-          onChange={handlePasswordChange}
-          variant="standard"
-          //   required
+          // showPassword={showPassword}
+          handleInputChange={handlePasswordChange}
+          // handleClickShowPassword={handleClickShowPassword}
         />
       </Box>
       <Button
@@ -73,9 +78,9 @@ const LogInForm = () => {
           fontWeight: "bold",
           px: 5,
           py: 1,
-          [theme.breakpoints.down("iphone7")]:{
-            mt:6
-          }
+          [theme.breakpoints.down("iphone7")]: {
+            mt: 6,
+          },
         }}
         color={"secondary"}
         variant={"contained"}
