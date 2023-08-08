@@ -1,6 +1,5 @@
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-// import AuthPage from "./pages/authPage/AuthPage";
 import NavWrapper from "./pages/NavWrapper";
 import RequestsPage from "./pages/requestsPage/RequestsPage";
 import CommunityPage from "./pages/communityPage/CommunityPage";
