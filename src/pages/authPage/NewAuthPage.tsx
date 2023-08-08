@@ -19,7 +19,6 @@ const NewAuthPage = () => {
       "0px 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 0px 8px 4px rgba(0, 0, 0, 0.05)",
   };
 
-  const theme = useTheme();
   const { themeMode } = useThemeContext();
 
   return (
@@ -46,20 +45,19 @@ const NewAuthPage = () => {
                 sx={{
                   minHeight: "20px",
                   mb: 6,
-                  bgcolor: theme.palette.background.default,
+                  bgcolor: "background.default",
                   borderRadius: 100,
                   "& .MuiTab-root": {
                     borderRadius: "25px",
-                    color: theme.palette.primary.light,
+                    color: "primary.light",
                     width: "108px",
                     minHeight: "20px",
                     fontWeight: "bold",
                     fontSize: "12px",
                   },
-                  // "& button:focus": { outlineColor: "transparent" },
                   "& button.Mui-selected": {
-                    bgcolor: theme.palette.secondary.light,
-                    color: theme.palette.primary.light,
+                    bgcolor: "secondary.light",
+                    color: "primary.light",
                   },
                   "& .MuiTabs-indicator": {
                     backgroundColor: "transparent",

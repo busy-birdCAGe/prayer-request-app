@@ -82,7 +82,8 @@ function App() {
         display: "flex",
         justifyContent: "center",
         textAlign: "center",
-        bgcolor: theme.palette.background.paper,
+        // bgcolor: theme.palette.background.paper,
+        bgcolor: "background.paper",
         minHeight: "100vh",
         padding: 0,
       }}
