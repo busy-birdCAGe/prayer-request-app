@@ -17,8 +17,7 @@ const ToggleTheme = () => {
 
   return (
     <Box sx={{ position: "absolute", zIndex: 1 }}>
-      <Button color="primary" onClick={handleThemeToggle}>
-        theme is at {themeMode}
+      <Button color="error" variant="contained" onClick={handleThemeToggle}>
       </Button>
     </Box>
   );
