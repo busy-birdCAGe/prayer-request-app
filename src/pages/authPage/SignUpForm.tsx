@@ -65,17 +65,6 @@ const SignUpForm = (props: SignUpProps) => {
     }
   };
 
-  // const [showPassword, setShowPassword] = useState(false);
-  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-
-  // const handleClickShowPassword = () => setShowPassword((show) => !show);
-  // const handleClickShowConfirmPassword = () => {
-  //   setShowConfirmPassword((show) => !show);
-  // };
-
-
-
   return (
     <Box
       sx={{
@@ -116,17 +105,13 @@ const SignUpForm = (props: SignUpProps) => {
             label="Password"
             name="password"
             value={formData.password}
-            // showPassword={showPassword}
             handleInputChange={handleInputChange}
-            // handleClickShowPassword={handleClickShowPassword}
           />
         <PasswordField
           label="Confirm Password"
           name="confirmPassword"
           value={formData.confirmPassword}
-          // showPassword={showConfirmPassword}
           handleInputChange={handleInputChange}
-          // handleClickShowPassword={handleClickShowConfirmPassword}
 
         />
       </Box>

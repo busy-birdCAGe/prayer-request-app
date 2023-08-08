@@ -8,7 +8,6 @@ const LogInForm = () => {
   const theme = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const theme = useTheme();
 
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,10 +29,6 @@ const LogInForm = () => {
       alert(error.message);
     }
   };
-
-  // const [showPassword, setShowPassword] = React.useState(false);
-
-  // const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   return (
     <Box
@@ -65,9 +60,7 @@ const LogInForm = () => {
           label="Password"
           name="password"
           value={password}
-          // showPassword={showPassword}
           handleInputChange={handlePasswordChange}
-          // handleClickShowPassword={handleClickShowPassword}
         />
       </Box>
       <Button

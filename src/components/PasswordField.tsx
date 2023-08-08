@@ -6,10 +6,7 @@ interface PasswordFieldProps {
   label: string;
   name: string;
   value: string;
-  // showPassword: boolean;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  // handleClickShowPassword: () => void;
-
 }
 
 const PasswordField = ({ label, name, value, handleInputChange,}: PasswordFieldProps) => {
