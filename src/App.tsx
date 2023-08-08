@@ -1,6 +1,5 @@
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 // import AuthPage from "./pages/authPage/AuthPage";
 import NavWrapper from "./pages/NavWrapper";
 import RequestsPage from "./pages/requestsPage/RequestsPage";
@@ -17,7 +16,6 @@ import NewAuthPage from "./pages/authPage/NewAuthPage";
 import { isLocalHost, isQA } from "./utils/Utils";
 
 function App() {
-  const theme = useTheme();
   const router = createBrowserRouter([
     // {
     //   TODO: create an error page to catch all nonexistent routes
