@@ -1,18 +1,34 @@
-import {
-  Box,
-  Button,
-  TextField,
-  useTheme,
-} from "@mui/material";
-import React, { useState } from "react";
+import { Box, Button, useTheme } from "@mui/material";
+import React from "react";
 import { userService } from "../../services/user";
-import PasswordField from "../../components/PasswordField";
+import PraPasswordField from "../../components/PraPasswordField";
+import { useForm } from "react-hook-form";
+// import { DevTool } from "@hookform/devtools";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import PraTextField from "../../components/PraTextfield";
+
+const signUpSchema = yup.object({
+  userName: yup.string().required("Username is required"),
+  email: yup
+    .string()
+    .email("Email format is not valid")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("Confirm password is required"),
+});
 
 interface SignUpProps {
   setTab: React.Dispatch<React.SetStateAction<number>>;
 }
 
-interface FormData {
+interface SignUpFormData {
   userName: string;
   email: string;
   password: string;
@@ -23,36 +39,28 @@ const SignUpForm = (props: SignUpProps) => {
   const { setTab } = props;
   const theme = useTheme();
 
-
-  const [formData, setFormData] = useState<FormData>({
-    userName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+  const form = useForm<SignUpFormData>({
+    defaultValues: {
+      userName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    resolver: yupResolver(signUpSchema),
   });
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => {
-      return { ...prevFormData, [name]: value };
-    });
-  };
+  const { handleSubmit, control } = form;
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const onSubmit = async (data: SignUpFormData) => {
+    // console.log(data);
     try {
-      let user = await userService.getUserByUserName(formData.userName);
+      let user = await userService.getUserByUserName(data.userName);
       if (user) {
         //TODO make this a modal
         alert("User already exists with the given user name");
         return;
       }
-      await userService.createUser(
-        formData.userName,
-        formData.email,
-        formData.password
-      );
+      await userService.createUser(data.userName, data.email, data.password);
       await userService.sendEmailVerification();
       //TODO make this a modal
       alert(
@@ -72,7 +80,8 @@ const SignUpForm = (props: SignUpProps) => {
         minHeight: "25vh",
       }}
       component="form"
-      onSubmit={handleSubmit}
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Box
         sx={{
@@ -83,36 +92,18 @@ const SignUpForm = (props: SignUpProps) => {
           "& .MuiInputBase-root, & .MuiFormLabel-root": { fontSize: "12px" },
         }}
       >
-        <TextField
-          label="Username"
-          type="text"
-          name="userName"
-          value={formData.userName}
-          onChange={handleInputChange}
-          variant="standard"
-          required
-        />
-        <TextField
+        <PraTextField label="Username" name="userName" control={control} />
+        <PraTextField
           label="Email"
-          type="email"
           name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          variant="standard"
-          required
+          control={control}
+          type="email"
         />
-          <PasswordField
-            label="Password"
-            name="password"
-            value={formData.password}
-            handleInputChange={handleInputChange}
-          />
-        <PasswordField
+        <PraPasswordField label="Password" name="password" control={control} />
+        <PraPasswordField
           label="Confirm Password"
           name="confirmPassword"
-          value={formData.confirmPassword}
-          handleInputChange={handleInputChange}
-
+          control={control}
         />
       </Box>
       <Button
@@ -133,6 +124,7 @@ const SignUpForm = (props: SignUpProps) => {
       >
         Submit
       </Button>
+      {/* <DevTool control={control} /> */}
     </Box>
   );
 };
