@@ -4,6 +4,9 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
   Auth,
+  onAuthStateChanged,
+  User as FirebaseAuthUser,
+  signOut
 } from "firebase/auth";
 import {
   collection,
@@ -25,6 +28,11 @@ class User {
     const { userName, userId } = doc;
     return new User(userName, userId);
   }
+}
+
+interface PageAuthState {
+  authenticated: boolean;
+  loading: boolean;
 }
 
 class UserService {
@@ -117,12 +125,35 @@ class UserService {
         throw new Error(errorMessages.auth.wrongPassword);
       } else if (error.code == "auth/user-not-found") {
         throw new Error(errorMessages.auth.wrongEmail);
+      } else if (error.code == "auth/invalid-email") {
+        throw new Error(errorMessages.auth.invalidEmail);
       } else {
         console.error(error);
         throw new Error(errorMessages.auth.any);
       }
     }
   }
+
+  setupAuthStateListener(
+    authState: React.Dispatch<React.SetStateAction<PageAuthState>>
+  ) {
+    onAuthStateChanged(this.auth, async (user: FirebaseAuthUser | null) => {
+      if (user) {
+        authState({ authenticated: true, loading: false });
+      } else {
+        authState({ authenticated: false, loading: false });
+      }
+    });
+  }
+
+  async signOutUser() {
+    try {
+      await signOut(this.auth);
+    } catch (error: any) {
+      throw new Error(errorMessages.auth.any)
+    }
+  }
+
 }
 
 export let userService = new UserService(auth, firestore);
