@@ -17,7 +17,8 @@ const signUpSchema = yup.object({
   password: yup
     .string()
     .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
+    .required("Password is required")
+    .matches(/^(?=.*\d)/, "Password must include at least 1 number"),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")
