@@ -9,7 +9,6 @@ const LogInForm = () => {
   const [password, setPassword] = useState("");
   // const theme = useTheme();
 
-
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -73,11 +72,11 @@ const LogInForm = () => {
           fontWeight: "bold",
           px: 5,
           py: 1,
-          [theme.breakpoints.down("iphone7")]:{
-            mt:6
-          }
+          [theme.breakpoints.down("iphone7")]: {
+            mt: 6,
+          },
         }}
-        color={"secondary"}
+        color={"primary"}
         variant={"contained"}
         type={"submit"}
       >

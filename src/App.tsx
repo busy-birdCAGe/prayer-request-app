@@ -13,6 +13,7 @@ import { Box } from "@mui/material";
 import ToggleTheme from "./components/ToggleTheme";
 import NewAuthPage from "./pages/authPage/NewAuthPage";
 import { isLocalHost, isQA } from "./utils/Utils";
+import AnswersPage from "./pages/answersPage/AnswersPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -40,6 +41,10 @@ function App() {
             {
               path: "community",
               element: <CommunityPage />,
+            },
+            {
+              path: "answers",
+              element: <AnswersPage />,
             },
             {
               path: "notifications",

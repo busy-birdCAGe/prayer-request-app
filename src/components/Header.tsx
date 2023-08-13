@@ -1,19 +1,9 @@
-import { Box, Divider, Typography, useTheme } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { Box, Divider, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-const Header = () => {
-  const location = useLocation().pathname;
-
-  // Mapping of route paths to display titles
-  const routeTitles: Record<string, string> = {
-    "/requests": "Requests",
-    "/community": "Community",
-    "/notifications": "Notifications",
-  };
-
-  // Getting the display title based on the current route
-  const currentTitle = routeTitles[location] || "Unknown Page";
+const Header = (props: { currentTitle: string }) => {
+  const { currentTitle } = props;
 
   return (
     <>
@@ -25,7 +15,7 @@ const Header = () => {
           alignItems: "end",
           height: "100%",
           px: "6%",
-          pb: "5px",
+          pb: "8px",
         }}
       >
         <Typography variant="title">{currentTitle}</Typography>
