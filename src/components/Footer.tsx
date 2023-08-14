@@ -17,7 +17,7 @@ const Footer = (props: FooterProps) => {
           display: "flex",
           width: "100%",
           justifyContent: "space-between",
-          px: "15%",
+          px: "12%",
           pt: "8px",
         }}
       >
