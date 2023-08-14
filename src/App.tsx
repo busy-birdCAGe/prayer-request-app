@@ -1,18 +1,19 @@
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import NavWrapper from "./pages/NavWrapper";
+import NavWrapper from "./layouts/NavWrapper";
 import RequestsPage from "./pages/requestsPage/RequestsPage";
 import CommunityPage from "./pages/communityPage/CommunityPage";
 import NotificationsPage from "./pages/notificationsPage/NotificationsPage";
-import PrivateRoutes from "./utils/PrivateRoutes";
+import PrivateRoutes from "./layouts/PrivateRoutes";
 import AccountInfo from "./pages/settingsPage/AccountInfo";
 import HelpAndSupport from "./pages/settingsPage/HelpAndSupport";
-import SettingsRoutes from "./utils/SettingsRoutes";
+import SettingsRoutes from "./layouts/SettingsRoutes";
 import SettingsPage from "./pages/settingsPage/SettingsPage";
 import { Box } from "@mui/material";
 import ToggleTheme from "./components/ToggleTheme";
 import NewAuthPage from "./pages/authPage/NewAuthPage";
 import { isLocalHost, isQA } from "./utils/Utils";
+import AnswersPage from "./pages/answersPage/AnswersPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -40,6 +41,10 @@ function App() {
             {
               path: "community",
               element: <CommunityPage />,
+            },
+            {
+              path: "answers",
+              element: <AnswersPage />,
             },
             {
               path: "notifications",
