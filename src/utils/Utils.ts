@@ -7,5 +7,5 @@ export const isQA = (hostname: string = window.location.host) => {
 };
 
 export function isMobileDevice() {
-  return window.innerWidth <= 600; // Adjust the threshold as needed
+  return window.innerWidth <= 600;
 }

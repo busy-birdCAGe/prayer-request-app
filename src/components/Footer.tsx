@@ -1,16 +1,17 @@
-import { Box, Divider, IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
-import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import { Box, Divider } from "@mui/material";
+import NavIcon from "./NavIcon";
+import { navItems } from "../layouts/navConfig";
 
-const Footer = (props: { currentTitle: string }) => {
+interface FooterProps {
+  currentTitle: string;
+}
+
+const Footer = (props: FooterProps) => {
   const { currentTitle } = props;
+
   return (
     <Box sx={{ alignItems: "end" }}>
       <Divider />
-
       <Box
         sx={{
           display: "flex",
@@ -20,34 +21,14 @@ const Footer = (props: { currentTitle: string }) => {
           pt: "8px",
         }}
       >
-        <IconButton
-          component={Link}
-          to="/requests"
-          color={currentTitle == "Requests" ? "primary" : "secondary"}
-        >
-          <DescriptionOutlinedIcon sx={{ fontSize: 25 }} />
-        </IconButton>
-        <IconButton
-          component={Link}
-          to="/answers"
-          color={currentTitle == "Answers" ? "primary" : "secondary"}
-        >
-          <ReplyOutlinedIcon sx={{ fontSize: 25 }} />
-        </IconButton>
-        <IconButton
-          component={Link}
-          to="/community"
-          color={currentTitle == "Community" ? "primary" : "secondary"}
-        >
-          <LanguageOutlinedIcon sx={{ fontSize: 25 }} />
-        </IconButton>
-        <IconButton
-          component={Link}
-          to="/notifications"
-          color={currentTitle == "Notifications" ? "primary" : "secondary"}
-        >
-          <NotificationsOutlinedIcon sx={{ fontSize: 25 }} />
-        </IconButton>
+        {navItems.map((item) => (
+          <NavIcon
+            to={item.path}
+            icon={item.icon}
+            currentTitle={currentTitle}
+            targetTitle={item.title}
+          />
+        ))}
       </Box>
     </Box>
   );

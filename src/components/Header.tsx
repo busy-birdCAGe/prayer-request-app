@@ -2,7 +2,11 @@ import { Box, Divider, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-const Header = (props: { currentTitle: string }) => {
+interface HeaderProps {
+  currentTitle: string;
+}
+
+const Header = (props: HeaderProps) => {
   const { currentTitle } = props;
 
   return (

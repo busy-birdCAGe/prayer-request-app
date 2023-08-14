@@ -3,20 +3,14 @@ import Header from "../components/Header";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import { isMobileDevice } from "../utils/Utils";
+import { navItems } from "./navConfig";
 
 const NavWrapper = () => {
   const location = useLocation().pathname;
 
-  // Mapping of route paths to display titles
-  const routeTitles: Record<string, string> = {
-    "/requests": "Requests",
-    "/community": "Community",
-    "/answers": "Answers",
-    "/notifications": "Notifications",
-  };
-
   // Getting the display title based on the current route
-  const currentTitle = routeTitles[location] || "Unknown Page";
+  const currentTitle =
+    navItems.find((item) => item.path === location)?.title || "Unknown Page";
 
   return (
     <Box sx={{ width: "100%" }}>
