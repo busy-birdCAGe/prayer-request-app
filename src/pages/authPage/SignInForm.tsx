@@ -1,32 +1,52 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
 import { Box, Button, useTheme } from "@mui/material";
 import { userService } from "../../services/user";
+import PraPasswordField from "../../components/PraPasswordField";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import PraTextField from "../../components/PraTextfield";
+// import { DevTool } from "@hookform/devtools";
 
-const LogInForm = () => {
+const signInSchema = yup.object({
+  email: yup
+    .string()
+    .email("Email format is not valid")
+    .required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
+
+interface SignInFormData {
+  email: string;
+  password: string;
+}
+
+const SignInForm = () => {
   const theme = useTheme();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // const theme = useTheme();
 
+  const form = useForm<SignInFormData>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: yupResolver(signInSchema),
+  });
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
+  const { handleSubmit, control, setError } = form;
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async (data: SignInFormData) => {
     try {
-      await userService.signInWithEmailAndPassword(email, password);
+      await userService.signInWithEmailAndPassword(data.email, data.password);
       //TODO make this a modal
       alert("Sign in successful!");
     } catch (error: any) {
       //TODO make this a modal
-      alert(error.message);
+      if (error.message.includes("email")) {
+        setError("email", { message: error.message });
+      } else if (error.message.includes("password")) {
+        setError("password", { message: error.message });
+      } else {
+        alert(error.message);
+      }
     }
   };
 
@@ -37,7 +57,8 @@ const LogInForm = () => {
         minHeight: "25vh",
       }}
       component="form"
-      onSubmit={handleSubmit}
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Box
         sx={{
@@ -48,22 +69,13 @@ const LogInForm = () => {
           "& .MuiInputBase-root": { marginBottom: "10px" },
         }}
       >
-        <TextField
+        <PraTextField
           label="Email"
+          name="email"
+          control={control}
           type="email"
-          value={email}
-          onChange={handleEmailChange}
-          variant="standard"
-          //   required
         />
-        <TextField
-          label="Password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-          variant="standard"
-          //   required
-        />
+        <PraPasswordField label="Password" name="password" control={control} />
       </Box>
       <Button
         sx={{
@@ -73,9 +85,9 @@ const LogInForm = () => {
           fontWeight: "bold",
           px: 5,
           py: 1,
-          [theme.breakpoints.down("iphone7")]:{
-            mt:6
-          }
+          [theme.breakpoints.down("iphone7")]: {
+            mt: 6,
+          },
         }}
         color={"secondary"}
         variant={"contained"}
@@ -83,8 +95,9 @@ const LogInForm = () => {
       >
         Submit
       </Button>
+      {/* <DevTool control={control} /> */}
     </Box>
   );
 };
 
-export default LogInForm;
+export default SignInForm;
