@@ -21,7 +21,7 @@ const LogInForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await userService.signInWithEmailAndPassword(email, password);
+      await userService.signIn(email, password);
       //TODO make this a modal
       alert("Sign in successful!");
     } catch (error: any) {

@@ -1,13 +1,11 @@
-export const firebase_config = {
-  apiKey: "AIzaSyCb5T6243y-t3Us358eVArFQAnNy9UZ97Q",
-  authDomain: "prayer-request-app-f56ba.firebaseapp.com",
-  projectId: "prayer-request-app-f56ba",
-  storageBucket: "prayer-request-app-f56ba.appspot.com",
-  messagingSenderId: "78789230436",
-  appId: "1:78789230436:web:95fd06cf4bf375ef704471",
-  measurementId: "G-5BHKFBQKMS"
+export const UserPoolConfig = {
+  UserPoolId: "us-east-1_ykkgBnOgc",
+  ClientId: "48qrtnia6no5pntqdgvevr9ek7",
 };
 
-export const base_url = "http://localhost:5173"
+export const base_url = "http://localhost:5173";
 
-export const env = "LOCAL"
+export const auth_service_url =
+  "https://4pli2ju5q5.execute-api.us-east-1.amazonaws.com";
+
+export const env = "LOCAL";

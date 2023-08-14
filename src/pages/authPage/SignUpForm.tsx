@@ -37,18 +37,12 @@ const SignUpForm = (props: SignUpProps) => {
     event.preventDefault();
 
     try {
-      let user = await userService.getUserByUserName(formData.userName);
-      if (user) {
-        //TODO make this a modal
-        alert("User already exists with the given user name");
-        return;
-      }
-      await userService.createUser(
+      await userService.signUp(
         formData.userName,
         formData.email,
         formData.password
       );
-      await userService.sendEmailVerification();
+      //await userService.sendEmailVerification();
       //TODO make this a modal
       alert(
         "Sign up successful! Please check your emails for a verification link."
