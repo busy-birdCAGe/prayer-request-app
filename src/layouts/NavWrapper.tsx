@@ -17,7 +17,12 @@ const NavWrapper = () => {
       <Box sx={{ height: isMobileDevice() ? "5.5%" : "10%" }}>
         <Header currentTitle={currentTitle} />
       </Box>
-      <Box sx={{ height: isMobileDevice() ? "84.5%" : "80%" }}>
+      <Box
+        sx={{
+          height: isMobileDevice() ? "84.5%" : "80%",
+          bgcolor: "background.default",
+        }}
+      >
         <Outlet />
       </Box>
       <Box sx={{ height: "10%" }}>

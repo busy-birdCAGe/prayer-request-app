@@ -4,9 +4,13 @@ import { Box } from "@mui/material";
 import { useState } from "react";
 
 const PrivateRoutes = () => {
+  // const [authState, setAuthState] = useState({
+  //   loading: false,
+  //   authenticated: true,
+  // });
   const [authState, setAuthState] = useState({
-    loading: true,
-    authenticated: false,
+    loading: false,
+    authenticated: true,
   });
 
   userService.setupAuthStateListener(setAuthState);

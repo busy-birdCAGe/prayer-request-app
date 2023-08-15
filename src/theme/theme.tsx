@@ -32,11 +32,15 @@ declare module "@mui/material/styles" {
 
   interface TypographyVariants {
     title: React.CSSProperties;
+    subtitle: React.CSSProperties;
+    body: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
     title?: React.CSSProperties;
+    subtitle?: React.CSSProperties;
+    body?: React.CSSProperties;
   }
 }
 
@@ -44,6 +48,7 @@ declare module "@mui/material/styles" {
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     title: true;
+    subtitle: true;
   }
 }
 
@@ -64,7 +69,7 @@ const commonThemeColors: ThemeMode = {
     // Define other common light theme colors here
   },
   dark: {
-    primaryBackground: "red",
+    primaryBackground: "#000000",//changing this from red to black
     primaryText: "#ffffff",
     primaryColor: "#ffffff",
     secondaryColor: "#434548",
@@ -117,6 +122,14 @@ export const createAppTheme = (
         fontSize: 24,
         fontWeight: 700,
       },
+      subtitle: {
+        fontSize: 14,
+        fontWeight: 700
+      },
+      body: {
+        fontSize: 14,
+        lineHeight: 1.25
+      }
     },
     breakpoints: {
       values: {
