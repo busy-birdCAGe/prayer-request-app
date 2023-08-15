@@ -13,12 +13,13 @@ const NavWrapper = () => {
     navItems.find((item) => item.path === location)?.title || "Unknown Page";
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", height:"100vh" }}>
       <Box sx={{ height: isMobileDevice() ? "5.5%" : "10%" }}>
         <Header currentTitle={currentTitle} />
       </Box>
       <Box
         sx={{
+          overflow:"auto",
           height: isMobileDevice() ? "84.5%" : "80%",
           bgcolor: "background.default",
         }}
