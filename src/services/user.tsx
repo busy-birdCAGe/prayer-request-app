@@ -1,9 +1,6 @@
-import {
-  CognitoUserPool,
-  // CognitoUserAttribute,
-  // CognitoUser,
-} from "amazon-cognito-identity-js";
+import { CognitoUserPool } from "amazon-cognito-identity-js";
 // import { errorMessages } from "../constants";
+import { ApiHandler } from "../utils/Api";
 import { auth_service_url, UserPoolConfig } from "../env";
 
 let UserPool = new CognitoUserPool(UserPoolConfig);
@@ -17,11 +14,18 @@ let UserPool = new CognitoUserPool(UserPoolConfig);
 //   loading: boolean;
 // }
 
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
 class UserService {
   userPool: CognitoUserPool;
+  api: ApiHandler;
 
   constructor(userPool: CognitoUserPool) {
     this.userPool = userPool;
+    this.api = new ApiHandler();
   }
 
   async signUp(
@@ -29,24 +33,28 @@ class UserService {
     email: string,
     password: string
   ): Promise<void> {
-    const response = await fetch(auth_service_url + "/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName,
-        email,
-        password,
-      }),
+    await this.api.req(auth_service_url + "/signup", "POST", {
+      userName,
+      email,
+      password,
     });
-    if (!response.ok) {
-      let errorMessage = await response.text();
-      throw new Error(errorMessage);
-    }
   }
 
-  async signIn(email: string, password: string) {}
+  async signIn(email: string, password: string): Promise<AuthTokens> {
+    return await this.api.req(auth_service_url + "/signin", "POST", {
+      email,
+      password,
+    });
+  }
+
+  async signedIn(): Promise<boolean> {
+    try {
+      await this.api.req(auth_service_url + "/authorized", "GET");
+      return true;
+    } catch (error: any) {
+      return false;
+    }
+  }
 }
 
 export let userService = new UserService(UserPool);
