@@ -5,12 +5,10 @@ interface ThemeColors {
   textPrimary: string;
   textSecondary: string;
   textInvert: string;
-  textInput: string;
   backgroundPrimary: string;
   backgroundSecondary: string;
   backgroundInvert: string;
   borderPrimary: string;
-  iconPrimary: string;
   iconSecondary: string;
   accent: string;
   // Add other common theme colors here
@@ -70,12 +68,10 @@ const themeColors: ThemeMode = {
     textPrimary: "#000000",
     textSecondary: "#344145",
     textInvert: "#ffffff",
-    textInput: "#8e9092",
     backgroundPrimary: "#ffffff",
     backgroundSecondary: "#f7f8f9",
     backgroundInvert: "#000000",
     borderPrimary: "#e9eaef",
-    iconPrimary: "#000000",
     iconSecondary: "#c4c4c4",
     accent: "#f9f871",
 
@@ -85,12 +81,10 @@ const themeColors: ThemeMode = {
     textPrimary: "#ffffff",
     textSecondary: "#e9eaef",
     textInvert: "#000000",
-    textInput: "#8e9092",
     backgroundPrimary: "#161616",
     backgroundSecondary: "#000000",
     backgroundInvert: "#ffffff",
     borderPrimary: "#434548",
-    iconPrimary: "#ffffff",
     iconSecondary: "#8e9092",
     accent: "#f9f871",
     // Define other common dark theme colors here
@@ -103,12 +97,10 @@ const createAppTheme = (themeMode: "light" | "dark"): ThemeOptions => {
     textPrimary,
     textSecondary,
     textInvert,
-    textInput,
     backgroundPrimary,
     backgroundSecondary,
     backgroundInvert,
     borderPrimary,
-    iconPrimary,
     iconSecondary,
     accent,
   } = themeColors[themeMode];
@@ -127,7 +119,7 @@ const createAppTheme = (themeMode: "light" | "dark"): ThemeOptions => {
       },
       primary: {
         // Custom primary color for buttons and other components
-        main: iconPrimary,
+        main: backgroundInvert,
         contrastText: textInvert,
       },
       secondary: {
