@@ -89,7 +89,7 @@ const SignInForm = () => {
             mt: 6,
           },
         }}
-        color={"secondary"}
+        color={"primary"}
         variant={"contained"}
         type={"submit"}
       >

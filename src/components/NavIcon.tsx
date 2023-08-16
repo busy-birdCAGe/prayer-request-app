@@ -12,7 +12,7 @@ interface NavIconProps {
 const NavIcon = (props: NavIconProps) => {
   const { to, icon, currentTitle, targetTitle } = props;
   const isActive = currentTitle === targetTitle;
-  const color = isActive ? "primary" : "secondary";
+  const color = isActive ? "primary" : "inactive";
 
   return (
     <IconButton component={Link} to={to} color={color}>

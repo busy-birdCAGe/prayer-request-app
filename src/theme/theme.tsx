@@ -2,16 +2,17 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 
 interface ThemeColors {
-  primaryBackground: string;
-  primaryText: string;
-  primaryColor: string;
-  secondaryColor: string;
-  contrastTextColor: string;
-  paper: string;
-  black: string;
-  tabColor: string;
-  divider: string;
-
+  textPrimary: string;
+  textSecondary: string;
+  textInvert: string;
+  textInput: string;
+  backgroundPrimary: string;
+  backgroundSecondary: string;
+  backgroundInvert: string;
+  borderPrimary: string;
+  iconPrimary: string;
+  iconSecondary: string;
+  accent: string;
   // Add other common theme colors here
 }
 
@@ -47,67 +48,97 @@ declare module "@mui/material/Typography" {
   }
 }
 
-// TODO: Red the palette naming, to not define the same color over and over again. Similar to figma variables
+//lets you use "inactive" as color input in IconButton
+declare module "@mui/material" {
+  interface IconButtonPropsColorOverrides {
+    inactive: true;
+  }
+}
 
-const commonThemeColors: ThemeMode = {
+declare module "@mui/material/styles" {
+  interface Palette {
+    inactive: Palette["primary"];
+  }
+
+  interface PaletteOptions {
+    inactive?: PaletteOptions["primary"];
+  }
+}
+
+const themeColors: ThemeMode = {
   light: {
-    primaryBackground: "#F7F8F9",
-    primaryText: "#000000",
-    primaryColor: "#000000",
-    secondaryColor: "#c4c4c4",
-    contrastTextColor: "#ffffff",
-    paper: "white",
-    black: "#000000",
-    tabColor: "#F9F871",
-    divider: "#E9EAEF",
+    textPrimary: "#000000",
+    textSecondary: "#344145",
+    textInvert: "#ffffff",
+    textInput: "#8e9092",
+    backgroundPrimary: "#ffffff",
+    backgroundSecondary: "#f7f8f9",
+    backgroundInvert: "#000000",
+    borderPrimary: "#e9eaef",
+    iconPrimary: "#000000",
+    iconSecondary: "#c4c4c4",
+    accent: "#f9f871",
 
     // Define other common light theme colors here
   },
   dark: {
-    primaryBackground: "red",
-    primaryText: "#ffffff",
-    primaryColor: "#ffffff",
-    secondaryColor: "#434548",
-    contrastTextColor: "#000000",
-    paper: "#161616",
-    black: "#000000",
-    tabColor: "#F9F871",
-    divider: "#434548",
-
+    textPrimary: "#ffffff",
+    textSecondary: "#e9eaef",
+    textInvert: "#000000",
+    textInput: "#8e9092",
+    backgroundPrimary: "#161616",
+    backgroundSecondary: "#000000",
+    backgroundInvert: "#ffffff",
+    borderPrimary: "#434548",
+    iconPrimary: "#ffffff",
+    iconSecondary: "#8e9092",
+    accent: "#f9f871",
     // Define other common dark theme colors here
   },
 };
 
-export const createAppTheme = (
-  colors: ThemeMode,
-  themeMode: "light" | "dark"
-): ThemeOptions => {
-  // TODO: Maybe add this here:
-  // const colors = commonThemeColors[themeMode]; // Get colors for the current theme mode
+const createAppTheme = (themeMode: "light" | "dark"): ThemeOptions => {
+  // destructuring object, also helps us see what variables are unused
+  const {
+    textPrimary,
+    textSecondary,
+    textInvert,
+    textInput,
+    backgroundPrimary,
+    backgroundSecondary,
+    backgroundInvert,
+    borderPrimary,
+    iconPrimary,
+    iconSecondary,
+    accent,
+  } = themeColors[themeMode];
 
   return createTheme({
     palette: {
       mode: themeMode,
+      //TODO: add a background color, fix paper and default
       background: {
-        paper: colors[themeMode].paper,
-        default: colors[themeMode].primaryBackground,
+        paper: backgroundPrimary,
+        default: backgroundSecondary,
       },
       text: {
-        primary: colors[themeMode].primaryText,
-        secondary: colors[themeMode].secondaryColor,
+        primary: textPrimary,
+        secondary: textSecondary,
       },
       primary: {
         // Custom primary color for buttons and other components
-        main: colors[themeMode].primaryColor,
-        light: colors[themeMode].black,
-        contrastText: colors[themeMode].contrastTextColor,
+        main: iconPrimary,
+        contrastText: textInvert,
       },
       secondary: {
-        main: colors[themeMode].secondaryColor,
-        light: colors[themeMode].tabColor,
-        contrastText: colors[themeMode].contrastTextColor,
+        main: accent,
+        contrastText: textPrimary,
       },
-      divider: colors[themeMode].divider,
+      inactive: {
+        main: iconSecondary,
+        contrastText: textInvert,
+      },
+      divider: borderPrimary,
 
       // You can customize other aspects of the theme here
       // typography, spacing, breakpoints, etc.
@@ -131,4 +162,4 @@ export const createAppTheme = (
   });
 };
 
-export default commonThemeColors;
+export default createAppTheme;

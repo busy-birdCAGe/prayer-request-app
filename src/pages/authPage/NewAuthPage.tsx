@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography, useTheme } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState } from "react";
 import SignInForm from "./SignInForm";
@@ -18,6 +18,8 @@ const NewAuthPage = () => {
     boxShadow:
       "0px 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 0px 8px 4px rgba(0, 0, 0, 0.05)",
   };
+
+  console.log(useTheme());
 
   const { themeMode } = useThemeContext();
 
@@ -45,19 +47,19 @@ const NewAuthPage = () => {
                 sx={{
                   minHeight: "20px",
                   mb: 6,
-                  bgcolor: "background.default",
+                  bgcolor: "white",
                   borderRadius: 100,
                   "& .MuiTab-root": {
                     borderRadius: "25px",
-                    color: "primary.light",
+                    color: "black",
                     width: "108px",
                     minHeight: "20px",
                     fontWeight: "bold",
                     fontSize: "12px",
                   },
                   "& button.Mui-selected": {
-                    bgcolor: "secondary.light",
-                    color: "primary.light",
+                    bgcolor: "secondary.main",
+                    color: "black",
                   },
                   "& .MuiTabs-indicator": {
                     backgroundColor: "transparent",
@@ -67,8 +69,22 @@ const NewAuthPage = () => {
                 onChange={handleChange}
                 centered
               >
-                <Tab label="Sign In" />
-                <Tab label="Sign Up" />
+                <Tab
+                  sx={{
+                    "& .MuiTouchRipple-child": {
+                      backgroundColor: "secondary.dark",
+                    },
+                  }}
+                  label="Sign In"
+                />
+                <Tab
+                  sx={{
+                    "& .MuiTouchRipple-child": {
+                      backgroundColor: "secondary.dark",
+                    },
+                  }}
+                  label="Sign Up"
+                />
               </Tabs>
             </Box>
           </Box>
