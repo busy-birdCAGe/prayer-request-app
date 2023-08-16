@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, Typography, useTheme } from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState } from "react";
 import SignInForm from "./SignInForm";
@@ -18,8 +18,6 @@ const NewAuthPage = () => {
     boxShadow:
       "0px 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 0px 8px 4px rgba(0, 0, 0, 0.05)",
   };
-
-  console.log(useTheme());
 
   const { themeMode } = useThemeContext();
 
