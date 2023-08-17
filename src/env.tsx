@@ -1,8 +1,3 @@
-export const UserPoolConfig = {
-  UserPoolId: "us-east-1_ykkgBnOgc",
-  ClientId: "48qrtnia6no5pntqdgvevr9ek7",
-};
-
 export const base_url = "http://localhost:5173";
 
 export const auth_service_url =

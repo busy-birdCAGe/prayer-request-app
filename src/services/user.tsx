@@ -1,18 +1,5 @@
-import { CognitoUserPool } from "amazon-cognito-identity-js";
-// import { errorMessages } from "../constants";
 import { ApiHandler } from "../utils/Api";
-import { auth_service_url, UserPoolConfig } from "../env";
-
-let UserPool = new CognitoUserPool(UserPoolConfig);
-
-// class User {
-//   constructor(public userName: string, public userId: string) {}
-// }
-
-// interface PageAuthState {
-//   authenticated: boolean;
-//   loading: boolean;
-// }
+import { auth_service_url } from "../env";
 
 export interface AuthTokens {
   accessToken: string;
@@ -20,11 +7,9 @@ export interface AuthTokens {
 }
 
 class UserService {
-  userPool: CognitoUserPool;
   api: ApiHandler;
 
-  constructor(userPool: CognitoUserPool) {
-    this.userPool = userPool;
+  constructor() {
     this.api = new ApiHandler();
   }
 
@@ -59,4 +44,4 @@ class UserService {
   }
 }
 
-export let userService = new UserService(UserPool);
+export let userService = new UserService();

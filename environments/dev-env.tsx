@@ -1,8 +1,3 @@
-export const UserPoolConfig = {
-  UserPoolId: "us-east-1_ykkgBnOgc",
-  ClientId: "48qrtnia6no5pntqdgvevr9ek7",
-};
-
 export const base_url =
   "http://dev-prayer-request-app.s3-website-us-east-1.amazonaws.com";
 
