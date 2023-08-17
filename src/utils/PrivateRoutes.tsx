@@ -1,23 +1,35 @@
 import { Outlet, Navigate } from "react-router-dom";
-//import { userService } from "../services/user";
+import { userService } from "../services/user";
 import { Box } from "@mui/material";
-//import { useState } from "react";
+import { useState } from "react";
 
 const PrivateRoutes = () => {
-  // const [authState, setAuthState] = useState({
-  //   loading: true,
-  //   authenticated: false,
-  // });
 
-  // userService.setupAuthStateListener(setAuthState);
+  const [authState, setAuthState] = useState({
+    loading: true,
+    authenticated: false,
+  });
 
-  let authState = {loading: false, authenticated: true}
+  userService.signedIn().then( (d: boolean) => {
+    if (d) {
+      setAuthState({
+        loading: false,
+        authenticated: true,
+      });
+    } else {
+      setAuthState({
+        loading: false,
+        authenticated: false,
+      });
+    }
+  });
 
   if (authState.loading) {
     return <Box>loading...</Box>; //TODO: Blank loading screen for now
   } else {
     return authState.authenticated ? <Outlet /> : <Navigate to="/" />;
   }
+  
 };
 
 export default PrivateRoutes;

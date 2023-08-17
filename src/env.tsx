@@ -6,6 +6,6 @@ export const UserPoolConfig = {
 export const base_url = "http://localhost:5173";
 
 export const auth_service_url =
-  "https://4pli2ju5q5.execute-api.us-east-1.amazonaws.com";
+  "https://c125u2nl0d.execute-api.us-east-1.amazonaws.com";
 
 export const env = "LOCAL";

@@ -33,25 +33,29 @@ class UserService {
     email: string,
     password: string
   ): Promise<void> {
-    await this.api.req(auth_service_url + "/signup", "POST", {
+    await this.api.req(auth_service_url + "/signup", "POST", true, {
       userName,
       email,
       password,
     });
   }
 
-  async signIn(email: string, password: string): Promise<AuthTokens> {
-    return await this.api.req(auth_service_url + "/signin", "POST", {
+  async signIn(email: string, password: string): Promise<void> {
+    let tokens = await this.api.req(auth_service_url + "/signin", "POST", true, {
       email,
       password,
     });
+    localStorage.setItem("accessToken", tokens.accessToken);
+    localStorage.setItem("refreshToken", tokens.refreshToken);
   }
 
   async signedIn(): Promise<boolean> {
     try {
-      await this.api.req(auth_service_url + "/authorized", "GET");
+      console.log("true")
+      await this.api.req(auth_service_url + "/authorized", "GET", false);
       return true;
     } catch (error: any) {
+      console.log(error)
       return false;
     }
   }

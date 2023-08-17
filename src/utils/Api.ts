@@ -7,7 +7,12 @@ export class ApiHandler {
     this.refreshToken = localStorage.getItem("refreshToken");
   }
 
-  async req(url: string, method: string, body?: object): Promise<any> {
+  async req(
+    url: string,
+    method: string,
+    json: boolean = true,
+    body?: object
+  ): Promise<any> {
     let headers: Record<string, string> = {
       "Content-Type": "application/json",
     };
@@ -23,6 +28,10 @@ export class ApiHandler {
       let errorMessage = await response.text();
       throw new Error(errorMessage);
     }
-    return await response.json()
+    if (json) {
+      return await response.json();
+    } else {
+      return await response.text();
+    }
   }
 }
