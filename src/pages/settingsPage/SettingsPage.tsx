@@ -1,16 +1,9 @@
-import { useMediaQuery, useTheme } from "@mui/material";
-import { Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import SettingsList from "./SettingsList";
+import { isMobileDevice } from "../../utils/Utils";
 
 const SettingsPage = () => {
-
-  const theme = useTheme()  
-    
-  //checking if device width is 600px or less
-  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  return mobile ? <SettingsList/> : <Navigate to='accountInfo'/>
-
+  return isMobileDevice() ? <SettingsList /> : <Navigate to="accountInfo" />;
 };
 
 export default SettingsPage;

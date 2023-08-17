@@ -51,11 +51,9 @@ class UserService {
 
   async signedIn(): Promise<boolean> {
     try {
-      console.log("true")
       await this.api.req(auth_service_url + "/authorized", "GET", false);
       return true;
     } catch (error: any) {
-      console.log(error)
       return false;
     }
   }

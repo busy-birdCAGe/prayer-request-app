@@ -10,6 +10,8 @@ interface ThemeColors {
   paper: string;
   black: string;
   tabColor: string;
+  divider: string;
+
   // Add other common theme colors here
 }
 
@@ -27,30 +29,50 @@ declare module "@mui/material/styles" {
     xl: true;
     iphone7: true; // adds the `mobile` breakpoint
   }
+
+  interface TypographyVariants {
+    title: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    title?: React.CSSProperties;
+  }
 }
+
+// Update the Typography's variant prop options
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    title: true;
+  }
+}
+
+// TODO: Red the palette naming, to not define the same color over and over again. Similar to figma variables
 
 const commonThemeColors: ThemeMode = {
   light: {
-    primaryBackground: "#ffffff",
+    primaryBackground: "#F7F8F9",
     primaryText: "#000000",
     primaryColor: "#000000",
-    secondaryColor: "#000000",
+    secondaryColor: "#c4c4c4",
     contrastTextColor: "#ffffff",
     paper: "white",
     black: "#000000",
-    tabColor: "#F9F871"
+    tabColor: "#F9F871",
+    divider: "#E9EAEF",
 
     // Define other common light theme colors here
   },
   dark: {
-    primaryBackground: "#ffffff",
+    primaryBackground: "red",
     primaryText: "#ffffff",
     primaryColor: "#ffffff",
-    secondaryColor: "#ffffff",
+    secondaryColor: "#434548",
     contrastTextColor: "#000000",
-    paper: "black",
+    paper: "#161616",
     black: "#000000",
-    tabColor: "#F9F871"
+    tabColor: "#F9F871",
+    divider: "#434548",
 
     // Define other common dark theme colors here
   },
@@ -60,6 +82,9 @@ export const createAppTheme = (
   colors: ThemeMode,
   themeMode: "light" | "dark"
 ): ThemeOptions => {
+  // TODO: Maybe add this here:
+  // const colors = commonThemeColors[themeMode]; // Get colors for the current theme mode
+
   return createTheme({
     palette: {
       mode: themeMode,
@@ -82,9 +107,16 @@ export const createAppTheme = (
         light: colors[themeMode].tabColor,
         contrastText: colors[themeMode].contrastTextColor,
       },
+      divider: colors[themeMode].divider,
 
       // You can customize other aspects of the theme here
       // typography, spacing, breakpoints, etc.
+    },
+    typography: {
+      title: {
+        fontSize: 24,
+        fontWeight: 700,
+      },
     },
     breakpoints: {
       values: {
