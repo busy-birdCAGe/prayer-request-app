@@ -18,7 +18,7 @@ const RequestsPage = () => {
     >
       <Grid container spacing={2} alignItems="center" justifyContent="center" >
         {mockRequestData.map((request) => (
-          <Grid xs={12} sm={6} md={4} lg={4}>
+          <Grid xs={12} sm={6} md={4} lg={3}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <RequestCard
                 userName={request.userName}

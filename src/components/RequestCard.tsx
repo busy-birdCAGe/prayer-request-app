@@ -12,8 +12,7 @@ const RequestCard = ({ userName, request }: RequestCardProps) => {
   return (
     <Box
       sx={{
-        // width: "95%",
-        minWidth: "100%",
+        width: "366px",
         height: "120px",
         bgcolor: "background.paper",
         textAlign: "left",
