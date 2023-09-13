@@ -18,7 +18,7 @@ class UserService {
     email: string,
     password: string
   ): Promise<void> {
-    await this.api.req(auth_service_url + "/signup", "POST", true, {
+    await this.api.req(auth_service_url + "/signup", "POST", false, {
       userName,
       email,
       password,
