@@ -15,7 +15,8 @@ export const errorMessages = {
         noUser: "No user signed in",
         sendVerification: "Encountered an error when sending email verification",
         weakPassword: "Password must be greater than 6 characters",
-        invalidEmail: "Please enter a valid email"
+        invalidEmail: "Please enter a valid email",
+        noAuth: "Not authorized"
     },
     database: {
         any: "Database encountered an error"

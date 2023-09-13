@@ -1,159 +1,47 @@
-import { auth, firestore } from "./firebase";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-  Auth,
-  onAuthStateChanged,
-  User as FirebaseAuthUser,
-  signOut
-} from "firebase/auth";
-import {
-  collection,
-  addDoc,
-  query,
-  where,
-  getDocs,
-  Firestore,
-  CollectionReference,
-  DocumentData,
-} from "firebase/firestore";
-import { userCollection, errorMessages } from "../constants";
-import { base_url } from "../env";
+import { ApiHandler } from "../utils/Api";
+import { auth_service_url } from "../env";
 
-class User {
-  constructor(public userName: string, public userId: string) {}
-
-  static fromDocument(doc: DocumentData): User {
-    const { userName, userId } = doc;
-    return new User(userName, userId);
-  }
-}
-
-interface PageAuthState {
-  authenticated: boolean;
-  loading: boolean;
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
 }
 
 class UserService {
-  auth: Auth;
-  firestore: Firestore;
-  userCollection: CollectionReference;
+  api: ApiHandler;
 
-  constructor(auth: Auth, firestore: Firestore) {
-    this.auth = auth;
-    this.firestore = firestore;
-    this.userCollection = collection(firestore, userCollection.name);
+  constructor() {
+    this.api = new ApiHandler();
   }
 
-  async getUserByUserName(userName: string): Promise<User | null> {
-    try {
-      const userNameQuery = query(
-        this.userCollection,
-        where(userCollection.fields.userName, "==", userName)
-      );
-      const querySnapshot = await getDocs(userNameQuery);
-      if (querySnapshot.size === 0) {
-        return null;
-      }
-      const doc = querySnapshot.docs[0].data();
-      return User.fromDocument(doc);
-    } catch (error: any) {
-      console.error(error);
-      throw new Error(errorMessages.database.any);
-    }
-  }
-
-  async createUser(
+  async signUp(
     userName: string,
     email: string,
     password: string
-  ): Promise<string> {
-    let credentials;
-    try {
-      credentials = await createUserWithEmailAndPassword(
-        this.auth,
-        email,
-        password
-      );
-    } catch (error: any) {
-      if (error.code == "auth/email-already-in-use") {
-        throw new Error(errorMessages.auth.emailExists);
-      } else if (error.code == "auth/weak-password") {
-        throw new Error(errorMessages.auth.weakPassword);
-      } else {
-        console.error(error);
-        throw new Error(errorMessages.auth.any);
-      }
-    }
-    try {
-      let doc = await addDoc(this.userCollection, {
-        [userCollection.fields.userName]: userName,
-        [userCollection.fields.userId]: credentials.user.uid,
-      });
-      return doc.id;
-    } catch (error: any) {
-      console.error(error);
-      throw new Error(errorMessages.database.any);
-    }
-  }
-
-  async sendEmailVerification() {
-    let user = this.auth.currentUser;
-    if (user) {
-      try {
-        await sendEmailVerification(user, {
-          url: base_url,
-        });
-      } catch (error: any) {
-        console.error(error);
-        throw new Error(errorMessages.auth.sendVerification);
-      }
-    } else {
-      throw new Error(errorMessages.auth.noUser);
-    }
-  }
-
-  async signInWithEmailAndPassword(
-    email: string,
-    password: string
   ): Promise<void> {
-    try {
-      await signInWithEmailAndPassword(this.auth, email, password);
-    } catch (error: any) {
-      if (error.code == "auth/wrong-password") {
-        throw new Error(errorMessages.auth.wrongPassword);
-      } else if (error.code == "auth/user-not-found") {
-        throw new Error(errorMessages.auth.wrongEmail);
-      } else if (error.code == "auth/invalid-email") {
-        throw new Error(errorMessages.auth.invalidEmail);
-      } else {
-        console.error(error);
-        throw new Error(errorMessages.auth.any);
-      }
-    }
-  }
-
-  setupAuthStateListener(
-    authState: React.Dispatch<React.SetStateAction<PageAuthState>>
-  ) {
-    onAuthStateChanged(this.auth, async (user: FirebaseAuthUser | null) => {
-      if (user) {
-        authState({ authenticated: true, loading: false });
-      } else {
-        authState({ authenticated: false, loading: false });
-      }
+    await this.api.req(auth_service_url + "/signup", "POST", false, {
+      userName,
+      email,
+      password,
     });
   }
 
-  async signOutUser() {
-    try {
-      await signOut(this.auth);
-    } catch (error: any) {
-      throw new Error(errorMessages.auth.any)
-    }
+  async signIn(email: string, password: string): Promise<void> {
+    let tokens = await this.api.req(auth_service_url + "/signin", "POST", true, {
+      email,
+      password,
+    });
+    localStorage.setItem("accessToken", tokens.accessToken);
+    localStorage.setItem("refreshToken", tokens.refreshToken);
   }
 
+  async signedIn(): Promise<boolean> {
+    try {
+      await this.api.req(auth_service_url + "/authorized", "GET", false);
+      return true;
+    } catch (error: any) {
+      return false;
+    }
+  }
 }
 
-export let userService = new UserService(auth, firestore);
+export let userService = new UserService();

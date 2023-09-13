@@ -35,7 +35,7 @@ const SignInForm = () => {
 
   const onSubmit = async (data: SignInFormData) => {
     try {
-      await userService.signInWithEmailAndPassword(data.email, data.password);
+      await userService.signIn(data.email, data.password);
       //TODO make this a modal
       alert("Sign in successful!");
     } catch (error: any) {

@@ -31,11 +31,15 @@ declare module "@mui/material/styles" {
 
   interface TypographyVariants {
     title: React.CSSProperties;
+    subtitle: React.CSSProperties;
+    body: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
     title?: React.CSSProperties;
+    subtitle?: React.CSSProperties;
+    body?: React.CSSProperties;
   }
 }
 
@@ -43,6 +47,7 @@ declare module "@mui/material/styles" {
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     title: true;
+    subtitle: true;
   }
 }
 
@@ -140,6 +145,14 @@ const createAppTheme = (themeMode: "light" | "dark"): ThemeOptions => {
         fontSize: 24,
         fontWeight: 700,
       },
+      subtitle: {
+        fontSize: 14,
+        fontWeight: 700
+      },
+      body: {
+        fontSize: 14,
+        lineHeight: 1.25
+      }
     },
     breakpoints: {
       values: {
