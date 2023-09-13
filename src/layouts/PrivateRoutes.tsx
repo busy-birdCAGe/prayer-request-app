@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 const PrivateRoutes = () => {
 
   const [authState, setAuthState] = useState({
-    loading: true,
-    authenticated: false,
+    loading: false,
+    authenticated: true,
   });
 
   useEffect(() => {
