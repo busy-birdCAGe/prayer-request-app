@@ -45,19 +45,19 @@ const NewAuthPage = () => {
                 sx={{
                   minHeight: "20px",
                   mb: 6,
-                  bgcolor: "background.default",
+                  bgcolor: "white",
                   borderRadius: 100,
                   "& .MuiTab-root": {
                     borderRadius: "25px",
-                    color: "primary.light",
+                    color: "black",
                     width: "108px",
                     minHeight: "20px",
                     fontWeight: "bold",
                     fontSize: "12px",
                   },
                   "& button.Mui-selected": {
-                    bgcolor: "secondary.light",
-                    color: "primary.light",
+                    bgcolor: "secondary.main",
+                    color: "black",
                   },
                   "& .MuiTabs-indicator": {
                     backgroundColor: "transparent",
@@ -67,8 +67,22 @@ const NewAuthPage = () => {
                 onChange={handleChange}
                 centered
               >
-                <Tab label="Sign In" />
-                <Tab label="Sign Up" />
+                <Tab
+                  sx={{
+                    "& .MuiTouchRipple-child": {
+                      backgroundColor: "secondary.dark",
+                    },
+                  }}
+                  label="Sign In"
+                />
+                <Tab
+                  sx={{
+                    "& .MuiTouchRipple-child": {
+                      backgroundColor: "secondary.dark",
+                    },
+                  }}
+                  label="Sign Up"
+                />
               </Tabs>
             </Box>
           </Box>
