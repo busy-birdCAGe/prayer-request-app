@@ -1,6 +1,6 @@
 import { Box, Button, useTheme } from "@mui/material";
 import React from "react";
-import { userService } from "../../services/user";
+import userService from "../../services/user";
 import PraPasswordField from "../../components/PraPasswordField";
 import { useForm } from "react-hook-form";
 // import { DevTool } from "@hookform/devtools";

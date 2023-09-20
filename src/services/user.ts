@@ -1,5 +1,5 @@
 import { ApiHandler } from "../utils/Api";
-import { auth_service_url } from "../env";
+import { backend_url } from "../env";
 
 export interface AuthTokens {
   accessToken: string;
@@ -18,7 +18,7 @@ class UserService {
     email: string,
     password: string
   ): Promise<void> {
-    await this.api.req(auth_service_url + "/signup", "POST", false, {
+    await this.api.req(backend_url + "/signup", "POST", false, {
       userName,
       email,
       password,
@@ -26,7 +26,7 @@ class UserService {
   }
 
   async signIn(email: string, password: string): Promise<void> {
-    let tokens = await this.api.req(auth_service_url + "/signin", "POST", true, {
+    let tokens = await this.api.req(backend_url + "/signin", "POST", true, {
       email,
       password,
     });
@@ -36,7 +36,8 @@ class UserService {
 
   async signedIn(): Promise<boolean> {
     try {
-      await this.api.req(auth_service_url + "/authorized", "GET", false);
+      await this.api.req(backend_url + "/authorized", "GET", false);
+      this.api.resetCache()
       return true;
     } catch (error: any) {
       return false;
@@ -44,4 +45,4 @@ class UserService {
   }
 }
 
-export let userService = new UserService();
+export default new UserService();
