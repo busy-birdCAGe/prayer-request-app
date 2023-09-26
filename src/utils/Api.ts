@@ -39,7 +39,8 @@ export class ApiHandler {
     method: string,
     json: boolean = true,
     body?: object,
-    query?: object
+    query?: object,
+    cache: boolean = true
   ): Promise<any> {
     let headers: Record<string, string> = {
       "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export class ApiHandler {
     if (query) {
       url = url + "?" + queryString.stringify(query);
     }
-    if (method == "GET") {
+    if (method == "GET" && cache) {
       let cachedResult = this.getCachedResult(url);
       if (cachedResult) {
         return cachedResult;
@@ -72,7 +73,10 @@ export class ApiHandler {
       result = await response.text();
     }
     if (method == "GET") {
-      return this.cacheResult(url, result);
+      if (cache) {
+        return this.cacheResult(url, result);
+      }
+      return result;
     }
     this.resetCache();
     return result;

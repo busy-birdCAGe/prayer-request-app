@@ -36,8 +36,14 @@ class UserService {
 
   async signedIn(): Promise<boolean> {
     try {
-      await this.api.req(backend_url + "/authorized", "GET", false);
-      this.api.resetCache()
+      await this.api.req(
+        backend_url + "/authorized",
+        "GET",
+        false,
+        undefined,
+        undefined,
+        false
+      );
       return true;
     } catch (error: any) {
       return false;
