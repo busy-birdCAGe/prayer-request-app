@@ -23,7 +23,7 @@ class RequestService {
       url: backend_url + "/requests",
       method: "GET",
       json: true,
-      body: {
+      query: {
         churches,
         limit,
         offset,
