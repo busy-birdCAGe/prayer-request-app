@@ -1,5 +1,5 @@
 import { Box, Button, useTheme } from "@mui/material";
-import { userService } from "../../services/user";
+import userService from "../../services/user";
 import PraPasswordField from "../../components/PraPasswordField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

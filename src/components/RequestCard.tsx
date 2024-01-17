@@ -2,9 +2,9 @@ import { Box, Typography } from "@mui/material";
 
 interface RequestCardProps {
   userName?: String;
-  request: String;
+  text: String;
 }
-const RequestCard = ({ userName, request }: RequestCardProps) => {
+const RequestCard = ({ userName, text }: RequestCardProps) => {
   const boxShadowStyle = {
     boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.05)",
   };
@@ -38,7 +38,7 @@ const RequestCard = ({ userName, request }: RequestCardProps) => {
           overflow: "hidden",
         }}
       >
-        {request}
+        {text}
       </Typography>
     </Box>
   );

@@ -1,13 +1,12 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { userService } from "../services/user";
+import userService from "../services/user";
 import { Box } from "@mui/material";
 import { useState, useEffect } from "react";
 
 const PrivateRoutes = () => {
-
   const [authState, setAuthState] = useState({
-    loading: false,
-    authenticated: true,
+    loading: true,
+    authenticated: false,
   });
 
   useEffect(() => {
@@ -31,7 +30,6 @@ const PrivateRoutes = () => {
   } else {
     return authState.authenticated ? <Outlet /> : <Navigate to="/" />;
   }
-  
 };
 
 export default PrivateRoutes;
