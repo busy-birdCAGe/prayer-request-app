@@ -19,17 +19,16 @@ class RequestService {
     limit: number,
     offset: number
   ): Promise<Array<RequestView>> {
-    return await this.api.req(
-      backend_url + "/requests",
-      "GET",
-      true,
-      undefined,
-      {
+    return await this.api.req({
+      url: backend_url + "/requests",
+      method: "GET",
+      json: true,
+      body: {
         churches,
         limit,
         offset,
       }
-    );
+    });
   }
 
   async createRequest(
@@ -38,11 +37,16 @@ class RequestService {
     anonymous: boolean,
     personal: boolean
   ): Promise<void> {
-    return await this.api.req(backend_url + "/requests", "POST", true, {
-      text,
-      anonymous,
-      personal,
-      churches,
+    return await this.api.req({
+      url: backend_url + "/requests",
+      method: "POST",
+      json: true,
+      body: {
+        text,
+        anonymous,
+        personal,
+        churches,
+      }
     });
   }
 }

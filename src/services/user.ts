@@ -18,17 +18,26 @@ class UserService {
     email: string,
     password: string
   ): Promise<void> {
-    await this.api.req(backend_url + "/signup", "POST", false, {
-      userName,
-      email,
-      password,
+    await this.api.req({
+      url: backend_url + "/signup",
+      method: "POST",
+      body: {
+        userName,
+        email,
+        password,
+      }
     });
   }
 
   async signIn(email: string, password: string): Promise<void> {
-    let tokens = await this.api.req(backend_url + "/signin", "POST", true, {
-      email,
-      password,
+    let tokens = await this.api.req({
+      url: backend_url + "/signin",
+      method: "POST",
+      json: true,
+      body: {
+        email,
+        password,
+      }
     });
     localStorage.setItem("accessToken", tokens.accessToken);
     localStorage.setItem("refreshToken", tokens.refreshToken);
@@ -36,14 +45,10 @@ class UserService {
 
   async signedIn(): Promise<boolean> {
     try {
-      await this.api.req(
-        backend_url + "/authorized",
-        "GET",
-        false,
-        undefined,
-        undefined,
-        false
-      );
+      await this.api.req({
+        url:  backend_url + "/authorized",
+        method: "GET"
+      });
       return true;
     } catch (error: any) {
       return false;

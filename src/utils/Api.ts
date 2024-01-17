@@ -1,5 +1,14 @@
 import queryString from "query-string";
 
+interface apiRequestParams {
+  url: string;
+  method: string;
+  json?: boolean;
+  body?: object;
+  query?: object;
+  cache?: boolean;
+}
+
 export class ApiHandler {
   accessToken: string | null;
   refreshToken: string | null;
@@ -34,47 +43,41 @@ export class ApiHandler {
     this.cache = {};
   }
 
-  async req(
-    url: string,
-    method: string,
-    json: boolean = true,
-    body?: object,
-    query?: object,
-    cache: boolean = true
-  ): Promise<any> {
+  async req(requestInput: apiRequestParams): Promise<any> {
     let headers: Record<string, string> = {
       "Content-Type": "application/json",
     };
     if (this.accessToken) {
       headers.Authorization = this.accessToken;
     }
-    if (query) {
-      url = url + "?" + queryString.stringify(query);
+    if (requestInput.query) {
+      requestInput.url =
+        requestInput.url + "?" + queryString.stringify(requestInput.query);
     }
-    if (method == "GET" && cache) {
-      let cachedResult = this.getCachedResult(url);
+    if (requestInput.method == "GET" && requestInput.cache) {
+      let cachedResult = this.getCachedResult(requestInput.url);
       if (cachedResult) {
         return cachedResult;
       }
     }
-    const response = await fetch(url, {
-      method: method,
+    const response = await fetch(requestInput.url, {
+      method: requestInput.method,
       headers: headers,
-      body: JSON.stringify(body),
+      body: JSON.stringify(requestInput.body),
     });
     if (!response.ok) {
       let errorMessage = await response.text();
       throw new Error(errorMessage);
     }
     let result;
-    if (json) {
+    if (requestInput.json) {
       result = await response.json();
     } else {
       result = await response.text();
     }
-    if (method == "GET") {
-      if (cache) {
-        return this.cacheResult(url, result);
+    if (requestInput.method == "GET") {
+      if (requestInput.cache) {
+        return this.cacheResult(requestInput.url, result);
       }
       return result;
     }
