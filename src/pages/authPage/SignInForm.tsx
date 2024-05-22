@@ -37,7 +37,9 @@ const SignInForm = () => {
     try {
       await userService.signIn(data.email, data.password);
       //TODO make this a modal
-      alert("Sign in successful!");
+      // alert("Sign in successful!");
+      window.location.href = window.location + "requests"
+
     } catch (error: any) {
       //TODO make this a modal
       if (error.message.includes("email")) {
