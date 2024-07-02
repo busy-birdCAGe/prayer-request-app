@@ -39,8 +39,8 @@ class UserService {
         password,
       }
     });
-    localStorage.setItem("accessToken", tokens.accessToken);
-    localStorage.setItem("refreshToken", tokens.refreshToken);
+    localStorage.setItem("accessToken", tokens.access_token);
+    localStorage.setItem("refreshToken", tokens.refresh_token);
   }
 
   async signedIn(): Promise<boolean> {
